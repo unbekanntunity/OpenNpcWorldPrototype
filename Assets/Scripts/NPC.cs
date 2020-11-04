@@ -1,0 +1,77 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class NPC : MonoBehaviour
+{
+
+    private NavMeshAgent agent;
+    private Animator anim;
+
+    [SerializeField] private float speedAnimDevider = 1;
+    [SerializeField] private float stopDistance;
+    [SerializeField] private float stopDistanceRandomAdjustment;
+
+    [Header("Locations to attend")]
+    [SerializeField] private Transform home;
+    [SerializeField] private Transform work;
+
+    [SerializeField] private NpcStates currentState;
+
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animator>();
+
+
+        FindObjectOfType<DayAndNightControl>().OnMorningHandler += GoToWork;
+        FindObjectOfType<DayAndNightControl>().OnEveningHandler += GoHome;
+
+        stopDistance = Random.Range(stopDistanceRandomAdjustment + stopDistance, stopDistance);
+        agent.stoppingDistance = stopDistance;
+
+        GoHome();
+    }
+
+    void Update()
+    {
+        anim.SetFloat("InputMagnitude", agent.velocity.magnitude / speedAnimDevider);
+
+        if(currentState == NpcStates.GoingToWork && Vector3.Distance(transform.position, work.position) < stopDistance)
+        {
+            Debug.Log("StartingToWork");
+            currentState = NpcStates.Working;
+            anim.SetBool("Working", true);
+        }
+    }
+
+    private void SetMoveTarget(Transform target)
+    {
+        agent.SetDestination(target.position);
+    }
+
+    private void GoToWork()
+    {
+        if (currentState == NpcStates.GoingToWork)
+            return;
+
+        currentState = NpcStates.GoingToWork;
+        SetMoveTarget(work);
+
+        Debug.Log(name + " is going to work");
+    }
+
+    private void GoHome()
+    {
+        if (currentState == NpcStates.GoingHome)
+            return;
+
+        currentState = NpcStates.GoingHome;
+        anim.SetBool("Working", false);
+
+        SetMoveTarget(home);
+
+        Debug.Log(name + " is going home");
+    }
+}
