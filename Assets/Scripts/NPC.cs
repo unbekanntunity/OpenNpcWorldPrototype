@@ -5,13 +5,14 @@ using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
-
+    
     private NavMeshAgent agent;
     private Animator anim;
 
     [SerializeField] private float speedAnimDevider = 1;
     [SerializeField] private float stopDistance;
     [SerializeField] private float stopDistanceRandomAdjustment;
+    
 
     [Header("Locations to attend")]
     [SerializeField] private Transform home;
