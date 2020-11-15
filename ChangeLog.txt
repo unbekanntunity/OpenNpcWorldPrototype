@@ -1,0 +1,14 @@
+----------------------------------------------
+Format 
+--------
+[DD.MM][Your Name]: Updates made
+
+-----------------------------------------------
+
+[14.11][Jose Britto]:
+Created EnemyBase.cs
+Created SkeletonAi.cs
+Added a variable 'ShowDebugMessages' to Npc.cs to control the messages shown in the console
+Added EnemyState to Enums.cs
+Added Health.cs to Player and all npcs to manage their health.
+Upgraded postprocess stack from version 2.2.2 to 2.3.0 since the older one had a bug which shows random error messages.

@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
+    public bool ShowDebugMessages;
     
     private NavMeshAgent agent;
     private Animator anim;
@@ -41,6 +42,7 @@ public class NPC : MonoBehaviour
 
         if(currentState == NpcStates.GoingToWork && Vector3.Distance(transform.position, work.position) < stopDistance)
         {
+            if(ShowDebugMessages)
             Debug.Log("StartingToWork");
             currentState = NpcStates.Working;
             anim.SetBool("Working", true);
@@ -59,7 +61,7 @@ public class NPC : MonoBehaviour
 
         currentState = NpcStates.GoingToWork;
         SetMoveTarget(work);
-
+        if(ShowDebugMessages)
         Debug.Log(name + " is going to work");
     }
 
@@ -72,7 +74,20 @@ public class NPC : MonoBehaviour
         anim.SetBool("Working", false);
 
         SetMoveTarget(home);
-
+        if(ShowDebugMessages)
         Debug.Log(name + " is going home");
+    }
+    private void OnDestroy()
+    {
+        try
+        {
+            FindObjectOfType<DayAndNightControl>().OnMorningHandler -= GoToWork;
+            FindObjectOfType<DayAndNightControl>().OnEveningHandler -= GoHome;
+        }
+        catch
+        {
+            if (ShowDebugMessages)
+                Debug.LogWarning("DayAndNightControl object is not found. This is ok if the scene is unloaded.");
+        }
     }
 }

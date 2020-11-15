@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2650718596372849521}
   - component: {fileID: 2650718596372849523}
   - component: {fileID: 2650718596372849522}
+  - component: {fileID: 7176504838547576364}
+  - component: {fileID: 3916653307949575333}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -68,12 +70,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096c17a238bc7e946806a109840208bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowDebugMessages: 0
   speedAnimDevider: 5
   stopDistance: 0.5
   stopDistanceRandomAdjustment: 2
   home: {fileID: 0}
   work: {fileID: 0}
   currentState: 0
+--- !u!136 &7176504838547576364
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2650718596372849520}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &3916653307949575333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2650718596372849520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c009d18b031c7249b11960ced0b8ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 100
+  CurrentHealth: 100
+  ShowDebugMessages: 1
 --- !u!1 &8103033540630746240
 GameObject:
   m_ObjectHideFlags: 0
