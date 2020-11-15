@@ -1220,7 +1220,7 @@ MonoBehaviour:
   VisualiseAgentActions: 0
   AttackCooldown: 1.5
   AttackRange: 2
-  VisionRange: 10
+  VisionRange: 15
   WhatCanThisEnemyAttack:
     serializedVersion: 2
     m_Bits: 1792

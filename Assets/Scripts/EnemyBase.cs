@@ -200,7 +200,7 @@ public abstract class EnemyBase : MonoBehaviour
             {
                 
                 
-                if (hit.transform != currentTarget.transform)
+                if (hit.transform != currentTarget.transform || Vector3.Distance(transform.position,hit.transform.position)>VisionRange)
                 {
 
                     currentTarget = null;
