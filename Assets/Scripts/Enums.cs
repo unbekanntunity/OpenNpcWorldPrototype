@@ -13,3 +13,10 @@ public enum EnemyState
     Chasing,
     Attacking
 }
+
+public enum Job
+{
+    Farmer,
+    FisherMan,
+    Lumberjack    
+}

@@ -5,6 +5,13 @@ Format
 
 -----------------------------------------------
 
+[25.11][Jose Britto]:
+Created NpcData.cs
+Made it the base class of Npc
+Added NpcTag.cs to change the text above the npc change according to its data
+Added a custom attribute [InspectorReadOnly] to make a variable readonly in inspector
+
+
 [14.11][Jose Britto]:
 Created EnemyBase.cs
 Created SkeletonAi.cs

@@ -3,29 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NPC : MonoBehaviour
+
+public class NPC : NpcData
 {
     public bool ShowDebugMessages;
-    
+
     private NavMeshAgent agent;
     private Animator anim;
 
     [SerializeField] private float speedAnimDevider = 1;
     [SerializeField] private float stopDistance;
     [SerializeField] private float stopDistanceRandomAdjustment;
-    
-
-    [Header("Locations to attend")]
-    [SerializeField] private Transform home;
-    [SerializeField] private Transform work;
-
-    [SerializeField] private NpcStates currentState;
-
+   
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
-
+      
 
         FindObjectOfType<DayAndNightControl>().OnMorningHandler += GoToWork;
         FindObjectOfType<DayAndNightControl>().OnEveningHandler += GoHome;

@@ -2327,12 +2327,30 @@ PrefabInstance:
       propertyPath: work
       value: 
       objectReference: {fileID: 2033566939}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: Home
+      value: 
+      objectReference: {fileID: 661354748}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: Work
+      value: 
+      objectReference: {fileID: 2033566939}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: Name
+      value: Presley
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: npcName
+      value: Prestley
+      objectReference: {fileID: 0}
     - target: {fileID: 2722809551112734972, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_text
-      value: 'Presley
-
-        The farmer'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6317785528157611900, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
@@ -3234,12 +3252,12 @@ PrefabInstance:
     - target: {fileID: 6448313182073325319, guid: b09e7b30f0f38e949b3fd2eec03bc534,
         type: 3}
       propertyPath: VisualiseAgentActions
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6448313182073325319, guid: b09e7b30f0f38e949b3fd2eec03bc534,
         type: 3}
       propertyPath: ShowDebugMessages
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6448313182073325319, guid: b09e7b30f0f38e949b3fd2eec03bc534,
         type: 3}
@@ -5078,12 +5096,35 @@ PrefabInstance:
       propertyPath: stopDistanceRandomAdjustment
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: Home
+      value: 
+      objectReference: {fileID: 603529209}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: Work
+      value: 
+      objectReference: {fileID: 841489073}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: Name
+      value: Dexter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: npcName
+      value: Dexter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: job
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2722809551112734972, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_text
-      value: 'Dexter
-
-        The fisherman'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6317785528157611900, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
@@ -7718,6 +7759,31 @@ PrefabInstance:
       propertyPath: stopDistanceRandomAdjustment
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: Home
+      value: 
+      objectReference: {fileID: 388546540}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: Work
+      value: 
+      objectReference: {fileID: 1633641275}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: Name
+      value: Sven
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: npcName
+      value: Sven
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: job
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2650718596372849523, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_Radius
@@ -7726,9 +7792,7 @@ PrefabInstance:
     - target: {fileID: 2722809551112734972, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_text
-      value: 'Sven
-
-        The lumberjack'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6317785528157611900, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
@@ -8970,6 +9034,31 @@ PrefabInstance:
       propertyPath: work
       value: 
       objectReference: {fileID: 2033566939}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: Home
+      value: 
+      objectReference: {fileID: 1711810009}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: Work
+      value: 
+      objectReference: {fileID: 2033566939}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: Name
+      value: Bob
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: npcName
+      value: Bob
+      objectReference: {fileID: 0}
+    - target: {fileID: 2722809551112734972, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6317785528157611900, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_Layer
@@ -12759,12 +12848,12 @@ PrefabInstance:
     - target: {fileID: 6448313182073325319, guid: b09e7b30f0f38e949b3fd2eec03bc534,
         type: 3}
       propertyPath: VisualiseAgentActions
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6448313182073325319, guid: b09e7b30f0f38e949b3fd2eec03bc534,
         type: 3}
       propertyPath: ShowDebugMessages
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6448313182073462212, guid: b09e7b30f0f38e949b3fd2eec03bc534,
         type: 3}
