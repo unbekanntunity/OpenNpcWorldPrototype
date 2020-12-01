@@ -48,7 +48,7 @@ public class SkeletonAi : EnemyBase
     public override void Attack()
     {
 
-        print("Attack");
+
         anim.SetBool("isIdle", false);
         anim.SetBool("isRunning", false);
         anim.SetBool("isWalking", false);

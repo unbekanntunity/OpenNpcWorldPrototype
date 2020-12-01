@@ -8,7 +8,7 @@ public class NPC : NpcData
 {
     public bool ShowDebugMessages;
 
-    private NavMeshAgent agent;
+    public NavMeshAgent agent { get; private set; }
     private Animator anim;
 
     [SerializeField] private float speedAnimDevider = 1;

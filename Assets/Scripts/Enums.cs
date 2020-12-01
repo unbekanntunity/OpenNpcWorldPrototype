@@ -3,7 +3,8 @@
     Idle,
     GoingToWork,
     Working,
-    GoingHome
+    GoingHome,
+    InteractingWithPlayer
 }
 
 public enum EnemyState

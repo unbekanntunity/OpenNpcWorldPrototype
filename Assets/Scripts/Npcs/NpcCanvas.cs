@@ -2,14 +2,21 @@
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(TMP_Text))]
-public class NpcTag : MonoBehaviour
-{
-    TMP_Text text;
 
+public class NpcCanvas : MonoBehaviour
+{
+    public TMP_Text text;
+
+    public Canvas canvas;
+    public Camera PlayerCam;
     private void Awake()
     {
-        text = GetComponent<TMP_Text>();
+        if(text == null)
+            text = GetComponentInChildren<TMP_Text>();
+        if(canvas == null)
+            canvas = GetComponent<Canvas>();
+        if (PlayerCam == null)
+            PlayerCam = Camera.main;
         updateText();
      
     }
@@ -24,6 +31,11 @@ public class NpcTag : MonoBehaviour
             data = new UnityEvent();
 
         data.AddListener(updateText);
+    }
+
+    private void Update()
+    {
+        canvas.transform.LookAt(PlayerCam.transform.position);
     }
 
     private void updateText()
