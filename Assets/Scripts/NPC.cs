@@ -34,7 +34,7 @@ public class NPC : NpcData
     {
         anim.SetFloat("InputMagnitude", agent.velocity.magnitude / speedAnimDevider);
 
-        if(currentState == NpcStates.GoingToWork && Vector3.Distance(transform.position, work.position) < stopDistance)
+        if((currentState == NpcStates.GoingToWork && Vector3.Distance(transform.position, work.position) < stopDistance )|| (agent.remainingDistance == 0 && !agent.pathPending))
         {
             if(ShowDebugMessages)
             Debug.Log("StartingToWork");
@@ -45,6 +45,7 @@ public class NPC : NpcData
 
     private void SetMoveTarget(Transform target)
     {
+        agent.ResetPath();
         agent.SetDestination(target.position);
     }
 

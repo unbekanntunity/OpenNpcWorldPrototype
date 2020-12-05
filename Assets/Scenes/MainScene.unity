@@ -5757,6 +5757,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PT_Medieval_Tree_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1074510935149524, guid: 543ba2233306d00479ef5713d436c12e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4184716620995200, guid: 543ba2233306d00479ef5713d436c12e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.63
@@ -5803,6 +5807,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 543ba2233306d00479ef5713d436c12e, type: 3}
+--- !u!1 &1618753662 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1074510935149524, guid: 543ba2233306d00479ef5713d436c12e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1618753661}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1618753663
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618753662}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: fab0918501d63734e9a19b64c51761ac, type: 3}
 --- !u!4 &1632026779 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 444884, guid: 22780bb3d42e70349b5857c462d56bcb,
