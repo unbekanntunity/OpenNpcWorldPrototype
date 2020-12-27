@@ -85,8 +85,6 @@ public class FirstPersonAIO : MonoBehaviour {
     private Vector3 followAngles;
     private Vector3 followVelocity;
     private Vector3 originalRotation;
-
-    private Animator anim;
     #endregion
 
     #region Movement Settings
@@ -174,10 +172,6 @@ public class FirstPersonAIO : MonoBehaviour {
     Vector3 miscRefVel;
     bool previousGrounded;
     AudioSource audioSource;
-
-    Vector3 lastPosition;
-    Transform myTransform;
-    bool isMoving;
 
     #endregion
 
@@ -312,11 +306,6 @@ public class BETA_SETTINGS{
         advanced.highFrictionMaterial.staticFriction =1;
         advanced.highFrictionMaterial.frictionCombine = PhysicMaterialCombine.Maximum;
         advanced.highFrictionMaterial.bounceCombine = PhysicMaterialCombine.Average;
-
-        anim = GetComponent<Animator>();
-        myTransform = transform;
-        lastPosition = myTransform.position;
-        isMoving = false;
         #endregion
 
         #region Headbobbing Settings - Start
@@ -376,7 +365,7 @@ public class BETA_SETTINGS{
         #region Movement Settings - FixedUpdate
         
         bool wasWalking = !isSprinting;
-        if (useStamina){
+        if(useStamina){
             isSprinting = Input.GetKey(KeyCode.LeftShift) && !isCrouching && staminaInternal > 0 && (Mathf.Abs(fps_Rigidbody.velocity.x) > 0.01f || Mathf.Abs(fps_Rigidbody.velocity.x) > 0.01f);
             if(isSprinting){
                 staminaInternal -= (staminaDepletionSpeed*2)*Time.deltaTime;
@@ -527,20 +516,6 @@ public class BETA_SETTINGS{
             }
         }
 
-        if (myTransform.position != lastPosition)
-            isMoving = true;
-        else
-            isMoving = false;
-
-        if (isMoving)
-        {
-            anim.SetBool("IsSprinting", true);
-        }
-        else
-        {
-            anim.SetBool("IsSprinting", false);
-        }
-        lastPosition = myTransform.position;
         #endregion
 
         #region BETA_SETTINGS - FixedUpdate
