@@ -475,7 +475,7 @@ public class BETA_SETTINGS{
         if(inputXY.magnitude > 1) { inputXY.Normalize(); }
        
         float yv = fps_Rigidbody.velocity.y;
-        bool didJump = canHoldJump?Input.GetButton("Jump"): Input.GetButtonDown("Jump");
+        bool didJump = canHoldJump?Input.GetButton("Jump"): Input.GetButton("Jump");
 
         if (!canJump) didJump = false;
 
