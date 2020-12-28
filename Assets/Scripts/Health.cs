@@ -14,13 +14,14 @@ public class Health : MonoBehaviour
         {
             CurrentHealth -= amt;
             if(ShowDebugMessages)
-            Debug.Log("Health of " + transform.name + " is " + CurrentHealth);
+                Debug.Log("Health of " + transform.name + " is " + CurrentHealth);
         }
         else
         {
             if(ShowDebugMessages)
-            Debug.Log(transform.name + " is Dead");
-            if (gameObject.tag == "Player")
+                Debug.Log(transform.name + " is Dead");
+
+            if (gameObject.tag == "Player" || gameObject.tag == "Enemy")
             {
                 transform.position = new Vector3(0, 1, -20);
                 Physics.SyncTransforms();

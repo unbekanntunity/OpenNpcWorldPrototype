@@ -3,6 +3,8 @@
 public class SkeletonAi : EnemyBase
 {
     public Animator anim;
+
+    public float enemyAttack = 20;
     
     protected override void Update()
     {
@@ -67,7 +69,11 @@ public class SkeletonAi : EnemyBase
         {
             if (col.transform == this.transform)
                 continue;
-            col.gameObject.GetComponentInParent<Health>().Damage(20);
+
+            if (!PlayerCombat.isBlock)
+            {
+                col.gameObject.GetComponentInParent<Health>().Damage(enemyAttack);
+            }
         }
     }
 }

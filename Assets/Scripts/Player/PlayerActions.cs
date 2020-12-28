@@ -4,8 +4,6 @@ public class PlayerActions : MonoBehaviour
 {
     public KeyCode InteractButton = KeyCode.E;
 
-    
-
     public LayerMask Mask;
     public float InteractionRange;
 
