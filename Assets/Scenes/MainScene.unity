@@ -14484,6 +14484,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: 20
+  canAttack: 1
+  attackCooldown: 1.5
+  anim: {fileID: 1743904249861333}
 --- !u!95 &1743904249861333
 Animator:
   serializedVersion: 3

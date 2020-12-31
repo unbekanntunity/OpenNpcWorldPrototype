@@ -1,9 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
     public float attackPoint = 20;
     public static bool isBlock;
+    public bool canAttack = true;
+    public float attackCooldown;
+    
+    public Animator anim;
 
     void Update()
     {
@@ -16,8 +21,11 @@ public class PlayerCombat : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && canAttack)
         {
+            anim.SetBool("isAttacking", true);
+            StartCoroutine(AttackCooldown());
+            
             if (Physics.Raycast(ray, out hit, 3))
             {
                 if (hit.transform.gameObject.CompareTag("Enemy"))
@@ -38,5 +46,13 @@ public class PlayerCombat : MonoBehaviour
         {
             isBlock = false;
         }
+    }
+    
+    IEnumerator AttackCooldown()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
+        anim.SetBool("isAttacking", false);
     }
 }
