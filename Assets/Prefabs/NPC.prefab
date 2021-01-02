@@ -157,6 +157,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &4847043937560343940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +368,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1240,6 +1242,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1385,6 +1388,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1709,6 +1713,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3000,6 +3005,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 1
 --- !u!114 &658929150548361935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3092,6 +3098,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3176,6 +3183,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8314901595278050823, guid: b4d0f82eedb95f543ab0961de54f43fd,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8314901595278050823, guid: b4d0f82eedb95f543ab0961de54f43fd,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.007
       objectReference: {fileID: 0}
@@ -3191,6 +3203,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8314901595278050823, guid: b4d0f82eedb95f543ab0961de54f43fd,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0037323525
+      objectReference: {fileID: 0}
+    - target: {fileID: 8314901595278050823, guid: b4d0f82eedb95f543ab0961de54f43fd,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.000000014901158
       objectReference: {fileID: 0}
@@ -3203,16 +3220,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.9999931
-      objectReference: {fileID: 0}
-    - target: {fileID: 8314901595278050823, guid: b4d0f82eedb95f543ab0961de54f43fd,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.0037323525
-      objectReference: {fileID: 0}
-    - target: {fileID: 8314901595278050823, guid: b4d0f82eedb95f543ab0961de54f43fd,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8314901595278050823, guid: b4d0f82eedb95f543ab0961de54f43fd,
         type: 3}
