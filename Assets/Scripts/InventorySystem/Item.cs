@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (fileName = "BaseItem", menuName = "Items")]
+[CreateAssetMenu (fileName = "BaseItem", menuName = "Items/BaseItem")]
 public class Item : ScriptableObject
 {
     // Data
@@ -11,6 +11,7 @@ public class Item : ScriptableObject
     [TextArea]
     public string Description = "This is an invalid item";
     public bool bCanTake = false;
+    public bool bCanDrop = true;
     public float Weight = 0.0f;
     
     // Rendering
@@ -48,14 +49,20 @@ public class Item : ScriptableObject
     }
 
     // Implement custom behaviour when the item is used to reap its benefits
-    virtual public void UseItem()
+    virtual public void OnItemUsed()
     {
 
     }
 
      // Implement custom behaviour when the item is exchanged to cook a higher level item
-    virtual public void ExchangeItem()
+    virtual public void OnItemExchanged()
     {
 
+    }
+
+    // Implement custom behaviour when the item is dropped
+    virtual public void OnItemDropped()
+    {
+        
     }
 }
