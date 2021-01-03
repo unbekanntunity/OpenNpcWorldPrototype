@@ -9,7 +9,7 @@ public class ItemButtonHandler : MonoBehaviour
     Inventory Inventory;
 
     bool bIsDragged = false;
-    Vector3 Position;
+    public Vector3 Position;
     GameObject LastCollidedObject = null;
 
     public ItemButtonHandler(Inventory.ItemData ItemData)
@@ -51,8 +51,14 @@ public class ItemButtonHandler : MonoBehaviour
                 Debug.Log("ToDrop");
             }
             else transform.position = Position;
-            bIsDragged = false;
+            StartCoroutine(Dragged());
         }
+    }
+    
+    IEnumerator Dragged() 
+    {
+        yield return null;
+        bIsDragged = false;
     }
 
     // Inteded for use by special UI sreas like the drop field, destroy field, etc
