@@ -86,6 +86,11 @@ public class InteractionScript : MonoBehaviour
             yield return new WaitForSeconds(4);
         }
 
+        if (isFirst)
+        {
+            yield return new WaitForSeconds(4);
+        }
+
         Debug.Log("Conversation ended");
         isFirst = false;
         isTalking = false;
