@@ -107,13 +107,6 @@
           </e>
           <e p="Enums.cs" t="Include" />
           <e p="Health.cs" t="Include" />
-          <e p="InventorySystem" t="Include">
-            <e p="Inventory.cs" t="Include" />
-            <e p="Item.cs" t="Include" />
-            <e p="ItemButtonHandler.cs" t="Include" />
-            <e p="ItemManager.cs" t="Include" />
-            <e p="ItemPickup.cs" t="Include" />
-          </e>
           <e p="NPC.cs" t="Include" />
           <e p="Npcs" t="Include">
             <e p="NpcCanvas.cs" t="Include" />
