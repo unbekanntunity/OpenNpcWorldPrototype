@@ -4,6 +4,7 @@
     <list default="true" id="bf230d23-8294-4fd7-8d42-f91fdf681662" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/ItemButtonHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/ItemButtonHandler.cs" afterDir="false" />
     </list>
+    <list default="true" id="a9e8ee04-7db9-44e9-b675-27d10c4c4ad0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,13 +13,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../Desktop/OpenNpcWorldPrototype-Master/Assets/Scripts/Player/Regan Scripts/PlayerCombat.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/Inventory.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/InventorySystem/ItemButtonHandler.cs" />
+      <option value="$PROJECT_DIR$/Assets/_AssetStorePackages/FirstPersion AIO Pack/FirstPersonAIO/FirstPersonAIO.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Player/Regan Scripts/PlayerCombat.cs" />
     </changedPaths>
   </component>
-  <component name="ProjectId" id="1mWUbyieIYr7NYoOFDVzFPI8wGt" />
+  <component name="ProjectId" id="1mQpbDjn1NwwXaJcWQgMKUJhHgw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -39,12 +43,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="bf230d23-8294-4fd7-8d42-f91fdf681662" name="Default Changelist" comment="" />
-      <created>1609608946938</created>
+      <changelist id="a9e8ee04-7db9-44e9-b675-27d10c4c4ad0" name="Default Changelist" comment="" />
+      <created>1609435777475</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1609608946938</updated>
-      <workItem from="1609609016217" duration="13396000" />
+      <updated>1609435777475</updated>
+      <workItem from="1609435948605" duration="2031000" />
     </task>
     <servers />
   </component>
