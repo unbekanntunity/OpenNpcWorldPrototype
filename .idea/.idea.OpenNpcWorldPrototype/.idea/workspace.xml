@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+    <list default="true" id="bf230d23-8294-4fd7-8d42-f91fdf681662" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/ItemButtonHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InventorySystem/ItemButtonHandler.cs" afterDir="false" />
+    </list>
     <list default="true" id="a9e8ee04-7db9-44e9-b675-27d10c4c4ad0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
