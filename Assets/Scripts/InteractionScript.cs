@@ -109,7 +109,7 @@ public class InteractionScript : MonoBehaviour
             {
                 if (priority > script.priority)
                 {
-                    if (Random.Range(0, 1000) == 1)
+                    if (Random.Range(0, 100) == 1)
                     {
                         isTalking = true;
                         isFirst = true;
