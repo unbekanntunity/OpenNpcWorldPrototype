@@ -3,7 +3,6 @@
 public class PlayerActions : MonoBehaviour
 {
     public KeyCode InteractButton = KeyCode.E;
-
     public LayerMask Mask;
     public float InteractionRange;
 
@@ -24,7 +23,7 @@ public class PlayerActions : MonoBehaviour
                 Vector3 rot = dialogue.transform.eulerAngles;
                 dialogue.transform.LookAt(transform);
                 dialogue.transform.eulerAngles = new Vector3(rot.x, dialogue.transform.eulerAngles.y, rot.z);
-                dialogue.say("Hello there. How are you");
+                dialogue.say(); 
             }
         }
     }

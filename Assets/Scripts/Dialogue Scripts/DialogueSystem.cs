@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 public class DialogueSystem : MonoBehaviour
@@ -40,5 +44,16 @@ public class DialogueSystem : MonoBehaviour
                 g.SetActive(true);
         }
         currentManager = null;
+    }
+    public void DisplayNextSentence(DialogueManager dialogueManager)
+    {
+        if(dialogueManager.sentences.Count == 0)
+        {
+            dialogueManager.EndDialogue();
+            return;
+        }
+        string sentence = dialogueManager.sentences.Dequeue();
+        dialogueManager.DialogueText.text = sentence;
+        Debug.Log(sentence);
     }
 }
