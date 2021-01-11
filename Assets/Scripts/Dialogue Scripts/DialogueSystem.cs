@@ -11,6 +11,12 @@ public class DialogueSystem : MonoBehaviour
     public static DialogueSystem instance;
 
     public DialogueManager currentManager { get; private set; }
+    private int index;
+    private float _textSpeed = 2f;
+    private string sentence;
+    private bool _options = false;
+    private bool _twoOptions = false;
+    private bool _threeOptions = false;
 
     private void Awake()
     {
@@ -52,8 +58,26 @@ public class DialogueSystem : MonoBehaviour
             dialogueManager.EndDialogue();
             return;
         }
-        string sentence = dialogueManager.sentences.Dequeue();
-        dialogueManager.DialogueText.text = sentence;
+        sentence = dialogueManager.sentences.Dequeue();
+        StartCoroutine(Type(dialogueManager));
         Debug.Log(sentence);
+    }
+
+    IEnumerator Type(DialogueManager dialogueManager)
+    {
+        dialogueManager.DialogueText.text = "";
+        foreach(char letter in sentence)
+        {
+            dialogueManager.DialogueText.text += letter;
+            yield return new WaitForSeconds(_textSpeed*Time.deltaTime);
+        }
+    }
+
+    public void OptionsTurnOn(DialogueManager dialogueManager)
+    {
+        if(_options == true && _twoOptions == true)
+        {
+            
+        }
     }
 }

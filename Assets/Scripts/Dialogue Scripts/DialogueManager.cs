@@ -15,7 +15,7 @@ public class DialogueManager : MonoBehaviour
     public Queue<string> sentences;
     public string[] FromFileDialogue;
     [SerializeField]
-    private Text _name;
+    private TMP_Text _name;
     NPC npc;
     private void Start() 
     {
