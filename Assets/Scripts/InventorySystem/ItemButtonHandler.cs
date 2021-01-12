@@ -46,9 +46,17 @@ public class ItemButtonHandler : MonoBehaviour
     {
         if (bIsDragged)
         {
-            if (LastCollidedObject)
+            
+            if (LastCollidedObject)  // If there is a last collided object
             {
-                Debug.Log("ToDrop");
+                Debug.Log(LastCollidedObject.name);
+                ItemButtonHandler temp = LastCollidedObject.GetComponent<ItemButtonHandler>();
+                if (temp) Debug.Log(temp.ItemData.Item.ItemName);
+                // If the buttonhandler of the object has an item defined, it is an inventory button
+                if (temp && temp.ItemData.Item)
+                {
+                    Inventory.SwitchItems(ItemData.Item, temp.ItemData.Item);
+                }
             }
             else transform.position = Position;
             StartCoroutine(Dragged());
@@ -61,7 +69,7 @@ public class ItemButtonHandler : MonoBehaviour
         bIsDragged = false;
     }
 
-    // Inteded for use by special UI sreas like the drop field, destroy field, etc
+    // Inteded for use by special UI areas like the drop field, destroy field, etc
     public void OnDrop()
     {
         if (LastCollidedObject)
@@ -69,20 +77,18 @@ public class ItemButtonHandler : MonoBehaviour
             ItemButtonHandler temp = LastCollidedObject.GetComponent<ItemButtonHandler>();
             if (temp)
             {
-                temp.Inventory.DropItem(temp.ItemData.Item.ItemId);
+                if (temp.ItemData.Item) temp.Inventory.DropItem(temp.ItemData.Item.ItemId);
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("ColEnter");
         LastCollidedObject = collision.gameObject;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("ColExit");
         LastCollidedObject = null;
     }
 }

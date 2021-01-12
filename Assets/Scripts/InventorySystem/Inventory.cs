@@ -59,9 +59,17 @@ public class Inventory : MonoBehaviour
         ManageInventoryUI();
     }
 
+    void ClearItemButtons()
+    {
+        for(int i=0; i< InventoryItemPanel.childCount; i++)
+        {
+            GameObject.Destroy(InventoryItemPanel.GetChild(i).gameObject);
+        }
+    }
+
     void RefreshInventoryUI()
     {
-        InventoryItemPanel.DetachChildren();
+        ClearItemButtons();
         foreach(ItemData i in InventoryList)
         {
             GameObject tempItem = Instantiate<GameObject>(ItemButtonPrefab);
@@ -198,13 +206,42 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public int FindItemSlot(Item Item)
+    {
+        for(int i = 0;  i < InventoryList.Count; i++)
+        {
+            if(InventoryList[i].Item == Item)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void SwitchItems(Item Item1, Item Item2)
+    {
+        Debug.Log("Switching");
+        int Item1Index = FindItemSlot(Item1);
+        int Item2Index = FindItemSlot(Item2);
+        if(Item1Index == -1 && Item2Index == -1)
+        {
+            return;
+        }
+        ItemData Item1Data = InventoryList[Item1Index];
+        ItemData Item2Data = InventoryList[Item2Index];
+        InventoryList[Item2Index] = Item1Data;
+        InventoryList[Item1Index] = Item2Data;
+
+        RefreshInventoryUI();
+    }
+
     public void UseItem(ItemData Itemdata)
     {
         Itemdata.Item.OnItemUsed();
         Debug.Log("ItemUsed");
     }
 
-    void CraftItem(ItemData ItemData)
+    void CraftItem(ItemData ItemToCraft)
     {
 
     }
