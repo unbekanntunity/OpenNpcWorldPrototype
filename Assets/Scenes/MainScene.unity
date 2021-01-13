@@ -12949,9 +12949,11 @@ MonoBehaviour:
   ItemMask:
     serializedVersion: 2
     m_Bits: 1024
+  EmptyItem: {fileID: 11400000, guid: d860df523efcea3419887844cb4cc696, type: 2}
   InventoryPanel: {fileID: 868791538}
   ItemButtonPrefab: {fileID: 6490415222528966399, guid: e95876373fe6a8447812cc2c4aaaf03c,
     type: 3}
+  MaxNumSlots: 12
 --- !u!4 &4204582995637765
 Transform:
   m_ObjectHideFlags: 0

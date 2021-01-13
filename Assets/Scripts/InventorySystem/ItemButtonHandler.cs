@@ -49,13 +49,11 @@ public class ItemButtonHandler : MonoBehaviour
             
             if (LastCollidedObject)  // If there is a last collided object
             {
-                Debug.Log(LastCollidedObject.name);
                 ItemButtonHandler temp = LastCollidedObject.GetComponent<ItemButtonHandler>();
-                if (temp) Debug.Log(temp.ItemData.Item.ItemName);
                 // If the buttonhandler of the object has an item defined, it is an inventory button
                 if (temp && temp.ItemData.Item)
                 {
-                    Inventory.SwitchItems(ItemData.Item, temp.ItemData.Item);
+                    Inventory.SwitchItems(transform.GetSiblingIndex(), temp.transform.GetSiblingIndex());
                 }
             }
             else transform.position = Position;

@@ -25,12 +25,14 @@ public class Inventory : MonoBehaviour
     public float CarryCapacity = 10;
     List<ItemData> InventoryList = new List<ItemData>();
     public LayerMask ItemMask;
+    public Item EmptyItem;
 
     // UI properties
     public GameObject InventoryPanel;
     Transform InventoryItemPanel;
     TMPro.TMP_Text InventoryStatusTextField;
     public GameObject ItemButtonPrefab;
+    public int MaxNumSlots = 12;
 
     // properties from PlayerActionsScript
     KeyCode InteractButton;
@@ -45,6 +47,13 @@ public class Inventory : MonoBehaviour
         InteractButton = PA.InteractButton;
         InteractionRange = PA.InteractionRange;
         PlayerCamera = PA.PlayerCamera;
+
+        // Make all slots empty
+        InventoryList.Clear();
+        for (int i = 0; i < MaxNumSlots; i++)
+        {
+            InventoryList.Add(new ItemData(EmptyItem, 0));
+        }
 
         InventoryItemPanel = InventoryPanel.transform.GetChild(1);
         InventoryStatusTextField = InventoryPanel.transform.GetChild(2).GetComponent<TMPro.TMP_Text>();
@@ -128,7 +137,7 @@ public class Inventory : MonoBehaviour
 
     bool CanTakeItem(Item Item, int Count)
     {
-        return GetInventoryWeight()+Item.Weight*Count <= CarryCapacity;
+        return GetInventoryWeight()+Item.Weight*Count <= CarryCapacity && GetNumEmptySlots() > 0;
     }
 
     float GetInventoryWeight()
@@ -141,24 +150,22 @@ public class Inventory : MonoBehaviour
         return CarryingMass;
     }
 
-    void AddItem(ItemPickup PickedItem)
+    int GetNumEmptySlots()
     {
-        for(int i = 0; i<InventoryList.Count; i++)
+        int NumEmptySlots = 0;
+        for (int i = 0; i < InventoryList.Count; i++)
         {
-            if(InventoryList[i].Item.ItemId == PickedItem.Item.ItemId)
+            if (InventoryList[i].Item.ItemId == -2)     // Found an empty slot
             {
-                ItemData temp= InventoryList[i];
-                temp.Count+= PickedItem.Count;
-                InventoryList[i]= temp;
-
-                RefreshInventoryUI();
-                return;                                     // Item type exists in inventory. Add count to it and return.
+                NumEmptySlots++;                                  // Item type exists in inventory. Add count to it and return.
             }
         }
-        // At this point the item type does not exist already in the inventory list. So let's add it to the list.
-        InventoryList.Add(new ItemData(PickedItem));
+        return NumEmptySlots;
+    }
 
-        RefreshInventoryUI();
+    void AddItem(ItemPickup PickedItem)
+    {
+        AddItem(new ItemData(PickedItem));
     }
 
     void AddItem(ItemData Itemdata)
@@ -176,15 +183,31 @@ public class Inventory : MonoBehaviour
             }
         }
         // At this point the item type does not exist already in the inventory list. So let's add it to the list.
-        InventoryList.Add(Itemdata);
+        AddToFreeSlot(Itemdata);
 
         RefreshInventoryUI();
+    }
+
+    void AddToFreeSlot(ItemData ItemData)
+    {
+        for (int i = 0; i < InventoryList.Count; i++)
+        {
+            if (InventoryList[i].Item.ItemId == -2)     // Found an empty slot
+            {
+                InventoryList[i] = ItemData;
+
+                RefreshInventoryUI();
+                return;                                     // Item type exists in inventory. Add count to it and return.
+            }
+        }
     }
 
     // Drops the item from the inventory and generates a pickup in the world to represent it.
     public void DropItem(int ItemId, int Count = 1)
     {
-        Debug.Log("Dropped : " + ItemId);
+        // If the item is not droppable, do nothing
+        if (!ItemManager.instance.GetItemFromId(ItemId).bCanDrop) return;
+
         for (int i = 0; i < InventoryList.Count; i++)
         {
             if (InventoryList[i].Item.ItemId == ItemId)
@@ -196,7 +219,10 @@ public class Inventory : MonoBehaviour
                 InventoryList[i] = temp;
 
                 // Refresh item inventory and refresh UI
-                if (InventoryList[i].Count == 0) InventoryList.RemoveAt(i);
+                if (InventoryList[i].Count == 0)
+                {
+                    InventoryList[i] = new ItemData(EmptyItem, 0);
+                }
                 RefreshInventoryUI();
 
                 // Spawn the removed item into the world as a pickup
@@ -220,13 +246,22 @@ public class Inventory : MonoBehaviour
 
     public void SwitchItems(Item Item1, Item Item2)
     {
-        Debug.Log("Switching");
         int Item1Index = FindItemSlot(Item1);
         int Item2Index = FindItemSlot(Item2);
-        if(Item1Index == -1 && Item2Index == -1)
+        if(Item1Index == -1 || Item2Index == -1)
         {
             return;
         }
+        ItemData Item1Data = InventoryList[Item1Index];
+        ItemData Item2Data = InventoryList[Item2Index];
+        InventoryList[Item2Index] = Item1Data;
+        InventoryList[Item1Index] = Item2Data;
+
+        RefreshInventoryUI();
+    }
+
+    public void SwitchItems(int Item1Index, int Item2Index)
+    {
         ItemData Item1Data = InventoryList[Item1Index];
         ItemData Item2Data = InventoryList[Item2Index];
         InventoryList[Item2Index] = Item1Data;
