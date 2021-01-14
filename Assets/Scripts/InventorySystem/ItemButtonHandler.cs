@@ -7,9 +7,10 @@ public class ItemButtonHandler : MonoBehaviour
 {
     Inventory.ItemData ItemData;
     Inventory Inventory;
+    public bool bIsItemButton = true;
 
     bool bIsDragged = false;
-    public Vector3 Position;
+    Vector3 Position;
     GameObject LastCollidedObject = null;
 
     public ItemButtonHandler(Inventory.ItemData ItemData)
@@ -19,8 +20,18 @@ public class ItemButtonHandler : MonoBehaviour
 
     public void Init(Inventory.ItemData Itemdata, Inventory Inventory)
     {
-        this.ItemData = Itemdata;
         this.Inventory = Inventory;
+
+        if (!Itemdata.Item)
+        {
+            // If this is null button destroy all children as they are not of use
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                GameObject.Destroy(transform.GetChild(i).gameObject);
+            }
+            return;
+        }
+        this.ItemData = Itemdata;
         GetComponentInChildren<TMPro.TMP_Text>().text = ItemData.Item.ItemName;
         GetComponent<Image>().sprite = ItemData.Item.ItemImage;
         GetComponentsInChildren<TMPro.TMP_Text>()[1].text = ItemData.Count.ToString();
@@ -33,7 +44,7 @@ public class ItemButtonHandler : MonoBehaviour
 
     public void OnDrag()
     {
-        transform.position = Input.mousePosition;
+        transform.position = Input.mousePosition;// + new Vector3(0, 0, -10);
     }
 
     public void OnBeginDrag()
@@ -46,15 +57,15 @@ public class ItemButtonHandler : MonoBehaviour
     {
         if (bIsDragged)
         {
-            
             if (LastCollidedObject)  // If there is a last collided object
             {
                 ItemButtonHandler temp = LastCollidedObject.GetComponent<ItemButtonHandler>();
-                // If the buttonhandler of the object has an item defined, it is an inventory button
-                if (temp && temp.ItemData.Item)
+                
+                if (temp && temp.bIsItemButton)
                 {
-                    Inventory.SwitchItems(transform.GetSiblingIndex(), temp.transform.GetSiblingIndex());
+                    Inventory.SwitchItems(transform.parent.GetSiblingIndex(), temp.transform.parent.GetSiblingIndex());
                 }
+                else transform.position = Position;
             }
             else transform.position = Position;
             StartCoroutine(Dragged());
@@ -75,7 +86,8 @@ public class ItemButtonHandler : MonoBehaviour
             ItemButtonHandler temp = LastCollidedObject.GetComponent<ItemButtonHandler>();
             if (temp)
             {
-                if (temp.ItemData.Item) temp.Inventory.DropItem(temp.ItemData.Item.ItemId);
+                Debug.Log("Dropping");
+                if (temp.ItemData.Item) temp.Inventory.DropItem(temp.ItemData.Item);
             }
         }
     }
