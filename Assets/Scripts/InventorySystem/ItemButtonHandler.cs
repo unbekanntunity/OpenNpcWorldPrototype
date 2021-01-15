@@ -39,7 +39,7 @@ public class ItemButtonHandler : MonoBehaviour
 
     public void OnButtonClicked()
     {
-        if(!bIsDragged) Inventory.UseItem(ItemData);
+        if(!bIsDragged && ItemData.Item) Inventory.UseItem(ItemData);
     }
 
     public void OnDrag()
