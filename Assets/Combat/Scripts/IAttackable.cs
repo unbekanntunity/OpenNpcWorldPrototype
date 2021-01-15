@@ -2,7 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IAttackable
+public class IAttackable : MonoBehaviour
 {
-    void OnAttack(GameObject attacker, Attack attack);
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }

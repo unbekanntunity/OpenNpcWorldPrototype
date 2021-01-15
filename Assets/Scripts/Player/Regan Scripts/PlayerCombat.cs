@@ -1,20 +1,23 @@
-﻿using System.Collections; 
+﻿using System.Collections;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
-{    
+{
+    public float attackPoint = 20;
+    public static bool isBlock;
+    public bool canAttack = true;
+    public float attackCooldown;
+    
     public Animator anim;
-    public AttackDefinition demoAttack;
-    public CharacterStats stats;
 
-    void Awake()
+    void Update()
     {
-        stats = GetComponent<CharacterStats>();
+        playerAttack();
+        playerBlock();
     }
 
-    public void AttackTarget(GameObject target)
+    void playerAttack()
     {
-        /*
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -31,18 +34,9 @@ public class PlayerCombat : MonoBehaviour
                 }
             }
         }
-        */
-        var attack = demoAttack.CreateAttack(stats, target.GetComponent<CharacterStats>());
-
-        var attackables = target.GetComponentsInChildren(typeof(IAttackable));
-
-        foreach (IAttackable attackable in attackables)
-        {
-            attackable.OnAttack(gameObject, attack);
-        }
     }
 
-   /* void playerBlock()
+    void playerBlock()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -61,5 +55,4 @@ public class PlayerCombat : MonoBehaviour
         canAttack = true;
         anim.SetBool("isAttacking", false);
     }
-   */
 }
