@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackedDebug : MonoBehaviour
+public class AttackedDebug : MonoBehaviour, IAttackable
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnAttack(GameObject attacker, Attack attack)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (attack.isCritical)
+            Debug.Log("Critical Damage");
+        Debug.LogFormat("{0} attacked {1} for {2} damage", attacker.name, name, attack.Damage);
     }
 }
