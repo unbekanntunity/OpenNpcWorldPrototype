@@ -26,6 +26,9 @@ public class Inventory : MonoBehaviour
     List<ItemData> InventoryList = new List<ItemData>();
     public LayerMask ItemMask;
 
+    // PlayerProperties
+    FirstPersonAIO FPCharacter;
+
     // UI properties
     public GameObject InventoryPanel;
     Transform InventoryItemPanel;
@@ -46,6 +49,8 @@ public class Inventory : MonoBehaviour
         InteractButton = PA.InteractButton;
         InteractionRange = PA.InteractionRange;
         PlayerCamera = PA.PlayerCamera;
+
+        FPCharacter = GetComponent<FirstPersonAIO>();
 
         // Make all slots empty
         InventoryList.Clear();
@@ -96,12 +101,16 @@ public class Inventory : MonoBehaviour
                 InventoryPanel.SetActive(false);
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
+                FPCharacter.playerCanMove = true;
+                FPCharacter.enableCameraMovement = true;
             }
             else
             {
                 InventoryPanel.SetActive(true);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.Confined;
+                FPCharacter.playerCanMove = false;
+                FPCharacter.enableCameraMovement = false;
             }
         }
     }
