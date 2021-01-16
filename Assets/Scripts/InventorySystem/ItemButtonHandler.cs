@@ -29,6 +29,8 @@ public class ItemButtonHandler : MonoBehaviour
             {
                 GameObject.Destroy(transform.GetChild(i).gameObject);
             }
+
+            GetComponent<Image>().color = new Color(1, 1, 1, 0);
             return;
         }
         this.ItemData = Itemdata;
@@ -44,13 +46,19 @@ public class ItemButtonHandler : MonoBehaviour
 
     public void OnDrag()
     {
-        transform.position = Input.mousePosition;// + new Vector3(0, 0, -10);
+        if (ItemData.Item)
+        {
+            transform.position = Input.mousePosition;// + new Vector3(0, 0, -10);
+        }
     }
 
     public void OnBeginDrag()
     {
-        Position = transform.position;
-        bIsDragged = true;
+        if (ItemData.Item)
+        {
+            Position = transform.position;
+            bIsDragged = true;
+        }
     }
 
     public void OnEndDrag()

@@ -16,8 +16,9 @@ MonoBehaviour:
   ItemName: Spoon
   Description: This is a spoon (Or so it is called...)
   bCanTake: 1
+  bCanDrop: 1
   Weight: 2
   ItemMesh: {fileID: 4300000, guid: 61b866e0f3885c84a86dac3479ea950f, type: 3}
   ItemMaterial: {fileID: -8469494145858465668, guid: 61b866e0f3885c84a86dac3479ea950f,
     type: 3}
-  ItemImage: {fileID: 0}
+  ItemImage: {fileID: 21300000, guid: 0bd01162062a550449bc425bdf6c0317, type: 3}
