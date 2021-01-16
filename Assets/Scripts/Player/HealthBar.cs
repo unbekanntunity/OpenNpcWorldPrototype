@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
 public class HealthBar : MonoBehaviour
 {
     public CharacterStats Character;
@@ -25,4 +25,4 @@ public class HealthBar : MonoBehaviour
         get => Health.value;
         set => Health.value = value > Health.maxValue ? Health.value = Health.maxValue : Health.value = value;
     }
-}
+}*/

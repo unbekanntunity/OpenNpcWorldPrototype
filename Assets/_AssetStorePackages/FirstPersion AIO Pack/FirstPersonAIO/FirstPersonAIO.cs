@@ -316,7 +316,7 @@ public class BETA_SETTINGS{
         if (Input.GetMouseButtonDown(0))
         {
             anim.SetBool("isAttacking", true);
-            int layerMask = 1 << 8;
+            int layerMask = LayerMask.GetMask("Npc");
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 if (hit.transform.gameObject.CompareTag("Npc"))

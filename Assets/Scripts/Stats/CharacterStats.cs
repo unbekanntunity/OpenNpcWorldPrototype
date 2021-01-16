@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-using System;
 
 public class CharacterStats : MonoBehaviour
 {
-    public event EventHandler OnHealthValueChange;
     public Stat maxHealth;
     public Stat currentHealth { get; private set; }
 
@@ -28,11 +26,9 @@ public class CharacterStats : MonoBehaviour
     {
         damage -= Armor.GetValue();
 
-        OnHealthValueChange(this, EventArgs.Empty);
-
         if (damage > 0.0f)
             currentHealth.SetValue(currentHealth.GetValue() - damage);
-        Debug.Log(transform.name + " takes " + damage + " damage");
+        //Debug.Log(transform.name + " takes " + damage + " damage");
 
         if (currentHealth.GetValue() <= 0.0f)
         {
