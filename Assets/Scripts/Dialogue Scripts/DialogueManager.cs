@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using TMPro;
 using System.IO;
 
@@ -10,12 +11,24 @@ public class DialogueManager : MonoBehaviour
 {
     public Camera dialogueCamera;
     public TMP_Text DialogueText;
+    public TMP_Text _name;
+    public Button _option1;
+    public Button _option2;
+    public Button _option3;
+    public Button _NewSentenceButton;
+
     public GameObject[] ToDisable;
     public UnityEvent OnStartDialogue;
     public Queue<string> sentences;
     public string[] FromFileDialogue;
     [SerializeField]
-    private TMP_Text _name;
+    private bool _options = false;
+    public bool _2options = false;
+    public bool _3options = false;
+    private int index;
+    private float _textSpeed = 2f;
+    private string sentence;
+
     NPC npc;
     private void Start() 
     {
@@ -29,9 +42,9 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void say() 
-    {
+    {;
         UpdateFile();
-        _name.text = transform.name;
+        _name.text = npc.name;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -47,7 +60,7 @@ public class DialogueManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);
         }
-        DialogueSystem.instance.DisplayNextSentence(this);
+        DisplayNextSentence();
         OnStartDialogue.Invoke();
     }
 
@@ -74,5 +87,57 @@ public class DialogueManager : MonoBehaviour
         path = "Assets/NPC dialogues/SentenceTesting.txt";
         StreamReader reader = new StreamReader(path);
         FromFileDialogue = File.ReadAllLines(path);
+    }
+    public void OptionsActive()
+    {
+        _NewSentenceButton.gameObject.SetActive(false);
+        DialogueText.gameObject.SetActive(false);
+        _name.gameObject.SetActive(false);
+        _options = true;
+        if (_options = true && _option2 == true)
+        {
+            _option1.gameObject.SetActive(true);
+            _option2.gameObject.SetActive(true);
+        }
+        else if(_options = true && _3options == true)
+        {
+            _option1.gameObject.SetActive(true);
+            _option2.gameObject.SetActive(true);
+            _option3.gameObject.SetActive(true);
+        }
+    }
+    public void DisplayNextSentence()
+    {
+        if(sentences.Count == 0)
+        {
+            EndDialogue();
+            return;
+        }
+        sentence = sentences.Dequeue();
+        StartCoroutine(Type());
+        Debug.Log(sentence);
+    }
+
+    IEnumerator Type()
+    {
+        DialogueText.text = "";
+        foreach(char letter in sentence)
+        {
+            DialogueText.text += letter;
+            yield return new WaitForSeconds(_textSpeed*Time.deltaTime);
+        }
+    }
+    public void Choices()
+    {
+        sentence = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().text;
+        _option1.gameObject.SetActive(false);
+        _option2.gameObject.SetActive(false);
+        _option3.gameObject.SetActive(false);
+        _NewSentenceButton.gameObject.SetActive(true);
+        DialogueText.gameObject.SetActive(true);
+        _name.gameObject.SetActive(true);
+        DialogueText.text = sentence;
+        _name.text = "Player";
+        Debug.Log(sentence);
     }
 }
