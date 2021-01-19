@@ -54,7 +54,19 @@ public class Item : ScriptableObject
 
     }
 
-     // Implement custom behaviour when the item is exchanged to cook a higher level item
+    // Implement custom behaviour when the item is equipped
+    virtual public void OnItemEquipped()
+    {
+
+    }
+
+    // Implement custom behaviour when the item is unequipped
+    virtual public void OnItemUnEquipped()
+    {
+
+    }
+
+    // Implement custom behaviour when the item is exchanged to cook a higher level item
     virtual public void OnItemExchanged()
     {
 

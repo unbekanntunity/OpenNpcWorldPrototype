@@ -24,6 +24,7 @@ public class Inventory : MonoBehaviour
     // Properties
     public float CarryCapacity = 10;
     List<ItemData> InventoryList = new List<ItemData>();
+    List<ItemData> EquippedList = new List<ItemData>();
     public LayerMask ItemMask;
 
     // PlayerProperties
@@ -32,6 +33,7 @@ public class Inventory : MonoBehaviour
     // UI properties
     public GameObject InventoryPanel;
     Transform InventoryItemPanel;
+    Transform InventoryEquipPanel;
     TMPro.TMP_Text InventoryStatusTextField;
     public GameObject ItemSlotPrefab;
     public int MaxNumSlots = 12;
@@ -52,15 +54,22 @@ public class Inventory : MonoBehaviour
 
         FPCharacter = GetComponent<FirstPersonAIO>();
 
-        // Make all slots empty
+        InventoryItemPanel = InventoryPanel.transform.GetChild(1);
+        InventoryStatusTextField = InventoryPanel.transform.GetChild(2).GetComponent<TMPro.TMP_Text>();
+        InventoryEquipPanel = InventoryPanel.transform.GetChild(4);
+
+        // Initialise slots
         InventoryList.Clear();
         for (int i = 0; i < MaxNumSlots; i++)
         {
             InventoryList.Add(new ItemData(null, 0));
         }
+        EquippedList.Clear();
+        for (int i = 0; i < InventoryEquipPanel.transform.childCount; i++)
+        {
+            EquippedList.Add(new ItemData(null, 0));
+        }
 
-        InventoryItemPanel = InventoryPanel.transform.GetChild(1);
-        InventoryStatusTextField = InventoryPanel.transform.GetChild(2).GetComponent<TMPro.TMP_Text>();
         RefreshInventoryUI();
         InventoryPanel.SetActive(false);
     }
@@ -91,6 +100,13 @@ public class Inventory : MonoBehaviour
             tempSlot.transform.SetParent(InventoryItemPanel);
         }
         InventoryStatusTextField.text = "Carrying : " + GetInventoryWeight() + ", Capacity : " + CarryCapacity.ToString();
+        Debug.Log(InventoryEquipPanel.transform.childCount);
+        // Refresh the equip panel
+        for (int i=0; i < InventoryEquipPanel.transform.childCount; i++)
+        {
+            InventoryEquipPanel.GetChild(i).GetChild(0).GetComponent<ItemButtonHandler>().Init(EquippedList[i], this);
+        }
+
     }
 
     void ManageInventoryUI()
@@ -153,6 +169,13 @@ public class Inventory : MonoBehaviour
     {
         float CarryingMass = 0.0f;
         foreach (ItemData i in InventoryList)
+        {
+            if (i.Item) // If not an empty slot
+            {
+                CarryingMass += i.Item.Weight * i.Count;        // weight of item * count of that item is the total wieght of that slot
+            }
+        }
+        foreach (ItemData i in EquippedList)
         {
             if (i.Item) // If not an empty slot
             {
@@ -277,6 +300,59 @@ public class Inventory : MonoBehaviour
         InventoryList[Item1Index] = Item2Data;
 
         RefreshInventoryUI();
+    }
+
+    public void EquipItem(ItemData Itemdata, int EquipIndex)
+    {
+        int EquipItemInventorySlot = FindItemSlot(Itemdata.Item);
+
+        UnEquip(EquipIndex);        // UnEquip any old item in the slot
+
+        if (Itemdata.Item)      // If item to equip is valid
+        {
+            EquippedList[EquipIndex] = Itemdata;
+            InventoryList[FindItemSlot(Itemdata.Item)] = new ItemData(null, 0);
+            Itemdata.Item.OnItemEquipped();
+
+            RefreshInventoryUI();
+        }
+
+    }
+
+    public void UnEquip(int EquipIndex, int OptionalIndex = -1)
+    {
+        if (EquippedList[EquipIndex].Item)      // Is there a valid item in the slot?
+        {
+            EquippedList[EquipIndex].Item.OnItemUnEquipped();
+            if (OptionalIndex < 0) AddItem(EquippedList[EquipIndex]);
+            else
+            {
+                if (InventoryList[OptionalIndex].Item) AddItem(EquippedList[EquipIndex]);
+                else InventoryList[OptionalIndex] = EquippedList[EquipIndex];
+            }
+            EquippedList[EquipIndex] = new ItemData(null, 0);
+
+            RefreshInventoryUI();
+        }
+    }
+
+    public bool CanEquipItem(ItemData Itemdata, int EquipIndex)
+    {
+        switch (EquipIndex)
+        {
+            case 0:
+                return Itemdata.Item is HelmetItem;
+            case 1:
+                return Itemdata.Item is ArmorItem;
+            case 2:
+                return Itemdata.Item is ShieldItem;
+            case 3:
+                return Itemdata.Item is WeaponItem;
+            case 4:
+                return Itemdata.Item is ShoeItem;
+            default: break;
+        }
+        return false;
     }
 
     public void UseItem(ItemData Itemdata)

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56563d83301d2af4382143d736ec9c81, type: 3}
+  m_Name: TestShoe
+  m_EditorClassIdentifier: 
+  ItemId: 6
+  ItemName: TestShoe
+  Description: This is a shoe
+  bCanTake: 1
+  bCanDrop: 1
+  Weight: 0.5
+  ItemMesh: {fileID: 4300000, guid: 23d80b1447aa2424cbcc30f7785b14d4, type: 3}
+  ItemMaterial: {fileID: -8469494145858465668, guid: 23d80b1447aa2424cbcc30f7785b14d4,
+    type: 3}
+  ItemImage: {fileID: 0}
