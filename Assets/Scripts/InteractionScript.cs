@@ -91,7 +91,7 @@ public class InteractionScript : MonoBehaviour
             yield return new WaitForSeconds(4);
         }
 
-        Debug.Log("Conversation ended");
+        Debug.Log("Conversation ended by" + gameObject.name);
         isFirst = false;
         isTalking = false;
 
@@ -101,21 +101,24 @@ public class InteractionScript : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Npc"))
+        if (!isTalking)
         {
-            GameObject obj = other.gameObject;
-            InteractionScript script = obj.GetComponent<InteractionScript>();
-            if (!script.isTalking)
+            if (other.CompareTag("Npc"))
             {
-                if (priority > script.priority)
+                GameObject obj = other.gameObject;
+                InteractionScript script = obj.GetComponentInParent<InteractionScript>();
+                if (!script.isTalking)
                 {
-                    if (Random.Range(0, 100) == 1)
+                    if (priority > script.priority)
                     {
-                        isTalking = true;
-                        isFirst = true;
-                        script.isTalking = true;
-                        script.isFirst = false;
-                        Debug.Log("Conversation started");
+                        if (Random.Range(0, 1000) == 1)
+                        {
+                            isTalking = true;
+                            isFirst = true;
+                            script.isTalking = true;
+                            script.isFirst = false;
+                            Debug.Log("Conversation started by " + gameObject.name);
+                        }
                     }
                 }
             }

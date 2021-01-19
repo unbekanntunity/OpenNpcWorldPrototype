@@ -69,11 +69,6 @@ public class SkeletonAi : EnemyBase
         {
             if (col.transform == this.transform)
                 continue;
-
-            if (!PlayerCombat.isBlock)
-            {
-                col.gameObject.GetComponentInParent<Health>().Damage(enemyAttack);
-            }
         }
     }
 }
