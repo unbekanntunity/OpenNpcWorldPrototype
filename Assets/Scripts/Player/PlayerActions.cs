@@ -20,10 +20,13 @@ public class PlayerActions : MonoBehaviour
                     dialogue = hit.transform.GetComponentInChildren<DialogueManager>();
                 if (dialogue == null)
                     return;
-                Vector3 rot = dialogue.transform.eulerAngles;
-                dialogue.transform.LookAt(transform);
-                dialogue.transform.eulerAngles = new Vector3(rot.x, dialogue.transform.eulerAngles.y, rot.z);
-                dialogue.say(); 
+                if(dialogue._isdialogue == false)
+                {
+                    Vector3 rot = dialogue.transform.eulerAngles;
+                    dialogue.transform.LookAt(transform);
+                    dialogue.transform.eulerAngles = new Vector3(rot.x, dialogue.transform.eulerAngles.y, rot.z);
+                    dialogue.say(); 
+                }
             }
         }
     }

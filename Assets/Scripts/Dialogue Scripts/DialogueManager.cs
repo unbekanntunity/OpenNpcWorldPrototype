@@ -28,11 +28,14 @@ public class DialogueManager : MonoBehaviour
     private int index;
     private float _textSpeed = 2f;
     private string sentence;
+    public bool _isdialogue = false;
+    private FirstPersonAIO player;
 
     NPC npc;
     private void Start() 
     {
-        sentences = new Queue<string>();   
+        sentences = new Queue<string>();
+        player = GameObject.FindWithTag("Player").GetComponent<FirstPersonAIO>();
     }
     private void Awake()
     {
@@ -42,7 +45,9 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void say() 
-    {;
+    {
+        player.playerCanMove = false;
+        _isdialogue = true;
         UpdateFile();
         _name.text = npc.name;
         Cursor.lockState = CursorLockMode.None;
@@ -74,6 +79,8 @@ public class DialogueManager : MonoBehaviour
         npc.agent.isStopped = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        _isdialogue = false;
+        player.playerCanMove = true;
     }
 
 
