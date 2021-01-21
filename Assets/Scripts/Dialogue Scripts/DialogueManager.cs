@@ -50,6 +50,7 @@ public class DialogueManager : MonoBehaviour
         _isdialogue = true;
         UpdateFile();
         _name.text = npc.name;
+        player.lockAndHideCursor = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
