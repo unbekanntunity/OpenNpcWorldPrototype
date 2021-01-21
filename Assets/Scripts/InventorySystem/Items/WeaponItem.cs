@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WeaponItem", menuName = "Items/WeaponItem")]
 public class WeaponItem : Item
 {
+    public float armorModifier;
+    public float damageModifier;
+
     override public void OnItemUsed()
     {
 

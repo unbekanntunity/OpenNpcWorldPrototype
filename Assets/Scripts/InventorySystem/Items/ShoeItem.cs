@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ShoeItem", menuName = "Items/ShoeItem")]
 public class ShoeItem : Item
 {
+    public float armorModifier;
+    public float damageModifier;
+
     override public void OnItemUsed()
     {
 

@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ShieldItem", menuName = "Items/ShieldItem")]
 public class ShieldItem : Item
 {
+    public float armorModifier;
+    public float damageModifier;
+
     override public void OnItemUsed()
     {
 

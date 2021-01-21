@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {    
     public Animator anim;
-    public AttackDefinition demoAttack;
+    public AttackDefinition Attack;
     public CharacterStats stats;
 
     void Awake()
@@ -32,7 +32,7 @@ public class PlayerCombat : MonoBehaviour
             }
         }
         */
-        var attack = demoAttack.CreateAttack(stats, target.GetComponent<CharacterStats>());
+        var attack = Attack.CreateAttack(stats, target.GetComponent<CharacterStats>());
 
         var attackables = target.GetComponentsInChildren(typeof(IAttackable));
 
