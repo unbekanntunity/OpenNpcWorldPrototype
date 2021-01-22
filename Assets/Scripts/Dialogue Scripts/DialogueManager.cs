@@ -99,23 +99,30 @@ public class DialogueManager : MonoBehaviour
     public void OptionsActive()
     {
         _NewSentenceButton.gameObject.SetActive(false);
+        _NewSentenceButton.interactable = false;
         DialogueText.gameObject.SetActive(false);
         _name.gameObject.SetActive(false);
         _options = true;
         if (_options = true && _option2 == true)
         {
             _option1.gameObject.SetActive(true);
+            _option1.interactable = true;
             _option2.gameObject.SetActive(true);
+            _option2.interactable = true;
         }
         else if(_options = true && _3options == true)
         {
             _option1.gameObject.SetActive(true);
+            _option1.interactable = true;
             _option2.gameObject.SetActive(true);
+            _option2.interactable = true;
             _option3.gameObject.SetActive(true);
+            _option3.interactable = true;
         }
     }
     public void DisplayNextSentence()
     {
+        _NewSentenceButton.interactable = false;
         if(sentences.Count == 0)
         {
             EndDialogue();
@@ -134,14 +141,18 @@ public class DialogueManager : MonoBehaviour
             DialogueText.text += letter;
             yield return new WaitForSeconds(_textSpeed*Time.deltaTime);
         }
+        _NewSentenceButton.interactable = true;
     }
     public void Choices()
     {
         sentence = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().text;
         _option1.gameObject.SetActive(false);
+        _option1.interactable = false;
         _option2.gameObject.SetActive(false);
+        _option2.interactable = false;
         _option3.gameObject.SetActive(false);
-        _NewSentenceButton.gameObject.SetActive(true);
+        _option3.interactable = false;
+        _NewSentenceButton.interactable = true;
         DialogueText.gameObject.SetActive(true);
         _name.gameObject.SetActive(true);
         DialogueText.text = sentence;
