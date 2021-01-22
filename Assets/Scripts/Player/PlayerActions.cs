@@ -9,6 +9,10 @@ public class PlayerActions : MonoBehaviour
 
     public Camera PlayerCamera;
 
+    public GameObject QuestUiWindow;
+    private bool questWindowActive = false;
+    public Quest quest;
+
     private void Update()
     {
         if (Input.GetKeyDown(InteractButton))
@@ -26,6 +30,27 @@ public class PlayerActions : MonoBehaviour
                 dialogue.transform.eulerAngles = new Vector3(rot.x, dialogue.transform.eulerAngles.y, rot.z);
                 dialogue.say("Hello there. How are you");
             }
+        }
+        QuestWindowToggle();
+    }
+
+    private void QuestWindowToggle()
+    {
+
+        if (Input.GetKeyDown(KeyCode.X) && questWindowActive == false)
+        {
+
+            QuestUiWindow.SetActive(true);
+            questWindowActive = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else if (Input.GetKeyDown(KeyCode.X) && questWindowActive == true)
+        {
+            QuestUiWindow.SetActive(false);
+            questWindowActive = false;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }
