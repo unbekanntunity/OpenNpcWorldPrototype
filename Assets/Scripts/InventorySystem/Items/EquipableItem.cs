@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ArmorItem", menuName = "Items/ArmorItem")]
-public class ArmorItem : Item
+[CreateAssetMenu(fileName = "EquipableItem", menuName = "Items/EquipableItem")]
+public class EquipableItem : Item
 {
-    public float armorModifier;
-    public float damageModifier;
+    public enum EquipTypes
+    {
+        Helmet, Armor, Shield, Weapon, Shoe
+    }
+
+    public EquipTypes EquipType;
 
     override public void OnItemUsed(){
         
