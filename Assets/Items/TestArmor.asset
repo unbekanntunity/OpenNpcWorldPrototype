@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: TestArmor
   m_EditorClassIdentifier: 
   ItemId: 3
-  ItemName: Armor
-  Description: This is a test armor item
+  ItemName: TestArmor
+  Description: This is an armor
   bCanTake: 1
   bCanDrop: 1
   Weight: 2
-  ItemMesh: {fileID: 4300000, guid: 53379ba6479c7ac41b759e5cfbf1ca58, type: 3}
-  ItemMaterial: {fileID: 2100000, guid: d291886d0645251478377f57e31e5a39, type: 2}
-  ItemImage: {fileID: 21300000, guid: 0536d8ada72a6ac4695386ea4bcd1ebe, type: 3}
+  ItemMesh: {fileID: 4300000, guid: 19e8f6ae4592f114098b8b949511d596, type: 3}
+  ItemMaterial: {fileID: 2100000, guid: cd7481125ba8a8242ace03065324d6e7, type: 2}
+  ItemImage: {fileID: 0}
+  EquipType: 1
