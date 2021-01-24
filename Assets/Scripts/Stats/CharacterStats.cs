@@ -20,7 +20,7 @@ public class CharacterStats : MonoBehaviour
 
         if (damage > 0.0f)
             currentHealth.SetValue(currentHealth.GetValue() - damage);
-        //Debug.Log(transform.name + " takes " + damage + " damage");
+        Debug.Log(transform.name + " takes " + damage + " damage");
     }
 
     public Stat GetArmor()

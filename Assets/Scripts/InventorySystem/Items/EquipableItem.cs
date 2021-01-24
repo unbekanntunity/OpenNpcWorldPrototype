@@ -5,12 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EquipableItem", menuName = "Items/EquipableItem")]
 public class EquipableItem : Item
 {
-    public enum EquipTypes
-    {
-        Helmet, Armor, Shield, Weapon, Shoe
-    }
-
     public EquipTypes EquipType;
+
+    public float damageModifier;
+    public float armorModifier;
+    public float healthModifier;
 
     override public void OnItemUsed(){
         
@@ -18,11 +17,15 @@ public class EquipableItem : Item
 
     override public void OnItemEquipped()
     {
-
+        EquipmentController.instance.Equip(this);
     }
 
     override public void OnItemUnEquipped()
     {
-
+        EquipmentController.instance.UnEquip(this);
     }
+}
+public enum EquipTypes
+{
+    Helmet, Armor, Shield, Weapon, Shoe
 }
