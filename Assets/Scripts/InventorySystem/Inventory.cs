@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    [System.Serializable]
     public struct ItemData
     {
         public Item Item;
@@ -143,12 +145,48 @@ public class Inventory : MonoBehaviour
                     PickUp = hit.transform.GetComponentInChildren<ItemPickup>();
                 if (PickUp == null)
                 {
+                    // Maybe this is a chest
+                    Chest Chest = hit.transform.GetComponentInParent<Chest>();
+                    if (Chest == null)
+                        Chest = hit.transform.GetComponentInChildren<Chest>();
+                    if (Chest == null)
+                    {
+                        // This is none of the above
+                        return;
+                    }
+                    OpenChest(Chest);
                     return;
                 }
                 PickUpItem(PickUp);
                 return;
             }
         }
+    }
+
+    void OpenChest(Chest chest)
+    {
+        if (CanOpenChest(chest))
+        {
+            foreach(ItemData i in chest.Items)
+            {
+                AddItem(i);
+            }
+            chest.OnOpened();
+        }
+    }
+
+    bool CanOpenChest(Chest Chest)
+    {
+        if (GetNumEmptySlots() < Chest.Items.Count) return false;
+
+        foreach (ItemData i in Chest.Items)
+        {
+            if (!CanTakeItem(i.Item, i.Count))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     void PickUpItem(ItemPickup PickedItem)
