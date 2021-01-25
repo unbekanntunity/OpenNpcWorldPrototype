@@ -66,7 +66,7 @@ public class DialogueManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);
         }
-        DisplayNextSentence();
+        DisplayNextSentence(gameObject);
         OnStartDialogue.Invoke();
     }
 
@@ -120,8 +120,9 @@ public class DialogueManager : MonoBehaviour
             _option3.interactable = true;
         }
     }
-    public void DisplayNextSentence()
+    public void DisplayNextSentence(GameObject caller)
     {
+        Debug.Log(caller.name);
         _NewSentenceButton.interactable = false;
         if(sentences.Count == 0)
         {
