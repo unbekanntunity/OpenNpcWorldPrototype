@@ -14,31 +14,20 @@ public class PlayerCombat : MonoBehaviour
 
     public void AttackTarget(GameObject target)
     {
-        /*
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Input.GetMouseButtonDown(0) && canAttack)
+        if (stats.GetWeapon() != null)
         {
-            anim.SetBool("isAttacking", true);
-            StartCoroutine(AttackCooldown());
-            
-            if (Physics.Raycast(ray, out hit, 3))
-            {
-                if (hit.transform.gameObject.CompareTag("Enemy"))
-                {
-                    hit.transform.gameObject.GetComponent<Health>().Damage(attackPoint);
-                }
-            }
+            stats.GetWeapon().ExecuteAttack(gameObject, target);
         }
-        */
-        var attack = Attack.CreateAttack(stats, target.GetComponent<CharacterStats>());
-
-        var attackables = target.GetComponentsInChildren(typeof(IAttackable));
-
-        foreach (IAttackable attackable in attackables)
+        else 
         {
-            attackable.OnAttack(gameObject, attack);
+            var attack = Attack.CreateAttack(stats, target.GetComponent<CharacterStats>());
+
+            var attackables = target.GetComponentsInChildren(typeof(IAttackable));
+
+            foreach (IAttackable attackable in attackables)
+            {
+                attackable.OnAttack(gameObject, attack);
+            }
         }
     }
 

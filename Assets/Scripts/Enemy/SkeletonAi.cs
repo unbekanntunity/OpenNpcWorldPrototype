@@ -3,8 +3,6 @@
 public class SkeletonAi : EnemyBase
 {
     public Animator anim;
-
-    public float enemyAttack = 20;
     
     protected override void Update()
     {
@@ -55,8 +53,8 @@ public class SkeletonAi : EnemyBase
         anim.SetBool("isRunning", false);
         anim.SetBool("isWalking", false);
         anim.SetBool("isAttacking", true);
-       //Idk if this is a good way of damaging
-        DealDamage();
+        //Idk if this is a good way of damaging
+        
     }
 
     

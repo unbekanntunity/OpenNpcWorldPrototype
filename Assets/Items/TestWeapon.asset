@@ -22,3 +22,7 @@ MonoBehaviour:
   ItemMaterial: {fileID: 2100000, guid: d7d5e72666737d040ba68a6bfc9d685a, type: 2}
   ItemImage: {fileID: 0}
   EquipType: 3
+  damageModifier: 0
+  armorModifier: 0
+  healthModifier: 0
+  weapon: {fileID: 11400000, guid: 6b7a1b511b51a39459835067d72647f9, type: 2}

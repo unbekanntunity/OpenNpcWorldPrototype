@@ -8,6 +8,7 @@ public class CharacterStats : MonoBehaviour
     public Stat Damage;
     public Stat Armor;
 
+    public Weapon weapon;
     void Awake()
     {
         currentHealth = new Stat();
@@ -41,5 +42,12 @@ public class CharacterStats : MonoBehaviour
     public Stat GetMaxHealth()
     {
         return maxHealth;
+    }
+    public Weapon GetWeapon()
+    {
+        if (weapon != null)
+            return weapon;
+        else
+            return null;
     }
 }

@@ -7,6 +7,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField]
     protected NavMeshAgent agent = null;
 
+    public CharacterStats stats;
     /// <summary>
     /// This event has two parameters. 
     /// The first one is the old state and the other one is the new state
@@ -38,7 +39,7 @@ public abstract class EnemyBase : MonoBehaviour
     Transform DebugSphere;
 #endif
     #endregion
-    protected virtual void Awake()
+    public virtual void Awake()
     {
         if (OnStateChanged == null)
             OnStateChanged = new EnemyStateChangeEvent();

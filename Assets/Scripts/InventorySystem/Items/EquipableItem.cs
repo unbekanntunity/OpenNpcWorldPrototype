@@ -11,6 +11,7 @@ public class EquipableItem : Item
     public float armorModifier;
     public float healthModifier;
 
+    public Weapon weapon = null;
     override public void OnItemUsed(){
         
     }

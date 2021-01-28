@@ -319,11 +319,8 @@ public class BETA_SETTINGS{
             int layerMask = LayerMask.GetMask("Npc");
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
-                if (hit.transform.gameObject.CompareTag("Npc"))
-                {
-                    GameObject attackable = hit.collider.gameObject;
-                    OnClickAttackable.Invoke(attackable);
-                }
+                GameObject attackable = hit.collider.gameObject;
+                OnClickAttackable.Invoke(attackable);
             }
         }
         else
