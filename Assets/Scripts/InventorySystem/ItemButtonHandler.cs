@@ -7,6 +7,7 @@ public class ItemButtonHandler : MonoBehaviour
 {
     Inventory.ItemData ItemData;
     Inventory Inventory;
+    Chest chest;
     public bool bIsItemButton = true;
     public bool bIsEquipField = false;
 
@@ -22,6 +23,38 @@ public class ItemButtonHandler : MonoBehaviour
     public void Init(Inventory.ItemData Itemdata, Inventory Inventory)
     {
         this.Inventory = Inventory;
+
+        if ((!Itemdata.Item) && bIsItemButton)
+        {
+            // If this is null button and supposed to store items destroy all children as they are not of use
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                GameObject.Destroy(transform.GetChild(i).gameObject);
+            }
+
+            GetComponent<Image>().color = new Color(1, 1, 1, 0);
+            return;
+        }
+        else if ((!Itemdata.Item) && bIsEquipField)
+        {
+            this.ItemData = Itemdata;
+            GetComponentInChildren<TMPro.TMP_Text>().text = "";
+            GetComponent<Image>().sprite = null;
+            GetComponentsInChildren<TMPro.TMP_Text>()[1].text = "";
+            GetComponent<Image>().color = new Color(1, 1, 1, 0);
+
+            return;
+        }
+        this.ItemData = Itemdata;
+        GetComponentInChildren<TMPro.TMP_Text>().text = ItemData.Item.ItemName;
+        GetComponent<Image>().sprite = ItemData.Item.ItemImage;
+        GetComponentsInChildren<TMPro.TMP_Text>()[1].text = ItemData.Count.ToString();
+        GetComponent<Image>().color = new Color(1, 1, 1, 1);
+    }
+
+    public void Init(Inventory.ItemData Itemdata, Chest chest)
+    {
+        this.chest = chest;
 
         if ((!Itemdata.Item) && bIsItemButton)
         {
@@ -82,15 +115,29 @@ public class ItemButtonHandler : MonoBehaviour
                 ItemButtonHandler temp = LastCollidedObject.GetComponent<ItemButtonHandler>();
                 if (bIsItemButton)
                 {
-                    if (temp && temp.bIsItemButton)
+                    // if temp has inventory defined, then it is bound to the inventory
+                    if (temp.Inventory)
                     {
-                        Inventory.SwitchItems(transform.parent.GetSiblingIndex(), temp.transform.parent.GetSiblingIndex());
+                        if (temp && temp.bIsItemButton)
+                        {
+                            Inventory.SwitchItems(transform.parent.GetSiblingIndex(), temp.transform.parent.GetSiblingIndex());
+                        }
+                        else if (temp && temp.bIsEquipField && Inventory.CanEquipItem(ItemData, temp.transform.parent.GetSiblingIndex()))
+                        {
+                            Inventory.EquipItem(ItemData, temp.transform.parent.GetSiblingIndex());
+                        }
+                        else transform.position = Position;
                     }
-                    else if (temp && temp.bIsEquipField && Inventory.CanEquipItem(ItemData, temp.transform.parent.GetSiblingIndex()))
+                    // if inventory is not defined, it may be bound to a chest
+                    else if(temp.chest)
                     {
-                        Inventory.EquipItem(ItemData, temp.transform.parent.GetSiblingIndex());
+                        Inventory.StoreItem(transform.parent.GetSiblingIndex(), temp.transform.parent.GetSiblingIndex());
                     }
-                    else transform.position = Position;
+                    // if none of the above are defines, there is a problem...
+                    else
+                    {
+                        transform.position = Position;
+                    }
                 }
                 else if (bIsEquipField)
                 {

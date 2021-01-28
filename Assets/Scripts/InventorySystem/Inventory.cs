@@ -29,6 +29,8 @@ public class Inventory : MonoBehaviour
     List<ItemData> EquippedList = new List<ItemData>();
     public LayerMask ItemMask;
 
+    Chest CurrentOpenChest;
+
     // PlayerProperties
     FirstPersonAIO FPCharacter;
 
@@ -102,7 +104,6 @@ public class Inventory : MonoBehaviour
             tempSlot.transform.SetParent(InventoryItemPanel);
         }
         InventoryStatusTextField.text = "Carrying : " + GetInventoryWeight() + ", Capacity : " + CarryCapacity.ToString();
-        Debug.Log(InventoryEquipPanel.transform.childCount);
         // Refresh the equip panel
         for (int i=0; i < InventoryEquipPanel.transform.childCount; i++)
         {
@@ -121,6 +122,12 @@ public class Inventory : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 FPCharacter.playerCanMove = true;
                 FPCharacter.enableCameraMovement = true;
+
+                if (CurrentOpenChest)
+                {
+                    CurrentOpenChest.OnClosed();
+                    CurrentOpenChest = null;
+                }
             }
             else
             {
@@ -145,16 +152,25 @@ public class Inventory : MonoBehaviour
                     PickUp = hit.transform.GetComponentInChildren<ItemPickup>();
                 if (PickUp == null)
                 {
-                    // Maybe this is a chest
-                    Chest Chest = hit.transform.GetComponentInParent<Chest>();
-                    if (Chest == null)
-                        Chest = hit.transform.GetComponentInChildren<Chest>();
-                    if (Chest == null)
+                    // Maybe this is a bundle
+                    Bundle bundle = hit.transform.GetComponentInParent<Bundle>();
+                    if (bundle == null)
+                        bundle = hit.transform.GetComponentInChildren<Bundle>();
+                    if (bundle == null)
                     {
-                        // This is none of the above
+                        // Maybe this is a chest
+                        Chest chest = hit.transform.GetComponentInParent<Chest>();
+                        if (chest == null)
+                            chest = hit.transform.GetComponentInChildren<Chest>();
+                        if (chest == null)
+                        {
+                            // This is none of the above
+                            return;
+                        }
+                        OpenChest(chest);
                         return;
                     }
-                    OpenChest(Chest);
+                    PickUpBundle(bundle);
                     return;
                 }
                 PickUpItem(PickUp);
@@ -165,21 +181,35 @@ public class Inventory : MonoBehaviour
 
     void OpenChest(Chest chest)
     {
-        if (CanOpenChest(chest))
+        // Open current inventory
+        InventoryPanel.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        FPCharacter.playerCanMove = false;
+        FPCharacter.enableCameraMovement = false;
+
+        // Make the chest open its inventory
+        CurrentOpenChest = chest;
+        chest.OnOpened();
+    }
+
+    void PickUpBundle(Bundle bundle)
+    {
+        if (CanTakeBundle(bundle))
         {
-            foreach(ItemData i in chest.Items)
+            foreach(ItemData i in bundle.Items)
             {
                 AddItem(i);
             }
-            chest.OnOpened();
+            bundle.OnPickedUp();
         }
     }
 
-    bool CanOpenChest(Chest Chest)
+    bool CanTakeBundle(Bundle bundle)
     {
-        if (GetNumEmptySlots() < Chest.Items.Count) return false;
+        if (GetNumEmptySlots() < bundle.Items.Count) return false;
 
-        foreach (ItemData i in Chest.Items)
+        foreach (ItemData i in bundle.Items)
         {
             if (!CanTakeItem(i.Item, i.Count))
             {
@@ -331,7 +361,6 @@ public class Inventory : MonoBehaviour
 
     public void SwitchItems(int Item1Index, int Item2Index)
     {
-        Debug.Log("Switching");
         ItemData Item1Data = InventoryList[Item1Index];
         ItemData Item2Data = InventoryList[Item2Index];
         InventoryList[Item2Index] = Item1Data;
@@ -390,6 +419,10 @@ public class Inventory : MonoBehaviour
                 return Itemdata.Item is ShoeItem;
             default: break;
         }*/
+        if (!(Itemdata.Item is EquipableItem))
+        {
+            return false;
+        }
         EquipableItem temp = (EquipableItem)Itemdata.Item;
         return (int)temp.EquipType == EquipIndex;
     }
@@ -397,7 +430,13 @@ public class Inventory : MonoBehaviour
     public void UseItem(ItemData Itemdata)
     {
         Itemdata.Item.OnItemUsed();
-        Debug.Log("ItemUsed");
+    }
+
+    public void StoreItem(int InventorySlotIndex, int ChestSlotIndex)
+    {
+        CurrentOpenChest.OnStoreItem(InventoryList[InventorySlotIndex], ChestSlotIndex);
+        InventoryList[InventorySlotIndex] = new ItemData(null, 0);
+        RefreshInventoryUI();
     }
 
     void CraftItem(ItemData ItemToCraft)
