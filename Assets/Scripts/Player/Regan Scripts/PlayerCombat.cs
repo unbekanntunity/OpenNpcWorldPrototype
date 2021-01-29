@@ -6,28 +6,41 @@ public class PlayerCombat : MonoBehaviour
     public Animator anim;
     public AttackDefinition Attack;
     public CharacterStats stats;
+    public float attackCooldown = 0f;
 
     void Awake()
     {
         stats = GetComponent<CharacterStats>();
     }
 
+    void Update()
+    {
+        if (attackCooldown > 0)
+            attackCooldown -= Time.deltaTime;
+    }
     public void AttackTarget(GameObject target)
     {
-        if (stats.GetWeapon() != null)
+        if (attackCooldown <= 0)
         {
-            stats.GetWeapon().ExecuteAttack(gameObject, target);
-        }
-        else 
-        {
-            var attack = Attack.CreateAttack(stats, target.GetComponent<CharacterStats>());
-
-            var attackables = target.GetComponentsInChildren(typeof(IAttackable));
-
-            foreach (IAttackable attackable in attackables)
+            if (stats.GetWeapon() != null)
             {
-                attackable.OnAttack(gameObject, attack);
+                stats.GetWeapon().ExecuteAttack(gameObject, target);
             }
+            else
+            {
+                var attack = Attack.CreateAttack(stats, target.GetComponent<CharacterStats>());
+
+                var attackables = target.GetComponentsInChildren(typeof(IAttackable));
+
+                foreach (IAttackable attackable in attackables)
+                {
+                    attackable.OnAttack(gameObject, attack);
+                }
+            }
+            if (stats.GetWeapon() != null)
+                attackCooldown = stats.GetWeapon().Cooldown;
+            else
+                attackCooldown = Attack.Cooldown;
         }
     }
 
