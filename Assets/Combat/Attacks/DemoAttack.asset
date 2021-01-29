@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DemoAttack
   m_EditorClassIdentifier: 
   Cooldown: 0
-  minDamage: 2
-  maxDamage: 6
+  minDamage: 10
+  maxDamage: 20
   criticalMultipliyer: 2
-  criticalChance: 0.5
-  Range: 0
+  criticalChance: 0.1
+  Range: 2

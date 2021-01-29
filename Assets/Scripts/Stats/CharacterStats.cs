@@ -17,7 +17,9 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(GameObject attacker, float damage)
     {
+        /*
         damage -= Armor.GetValue();
+        */
 
         if (damage > 0.0f)
             currentHealth.SetValue(currentHealth.GetValue() - damage);

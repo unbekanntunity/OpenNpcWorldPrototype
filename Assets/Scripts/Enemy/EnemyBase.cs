@@ -24,8 +24,6 @@ public abstract class EnemyBase : MonoBehaviour
     public bool VisualiseAgentActions;
     #endregion
 
-    public float AttackCooldown = 1.5f;
-    public float AttackRange = 0.5f;
     public float VisionRange;
     public LayerMask WhatCanThisEnemyAttack;
     public EnemyState CurrentState { get; private set; }
@@ -44,8 +42,8 @@ public abstract class EnemyBase : MonoBehaviour
         if (OnStateChanged == null)
             OnStateChanged = new EnemyStateChangeEvent();
 
-        
-        
+        if (stats == null)
+            stats = GetComponent<CharacterStats>();
 
         #region Editor Only
 #if UNITY_EDITOR
@@ -87,7 +85,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     }
 
-    public abstract void Attack();
+    public abstract void Attack(GameObject target);
 
     //This function is to be called from animation
     public abstract void DealDamage();
@@ -109,13 +107,13 @@ public abstract class EnemyBase : MonoBehaviour
                 ChangeState(EnemyState.Idle);
                 return;            
             }
-            if ((currentTarget.position - transform.position).magnitude <= AttackRange)
+            if ((currentTarget.position - transform.position).magnitude <= stats.GetWeapon().Range)
             {
                 if (attackCooldown <= 0)
                 {
-                    Attack();
+                    Attack(currentTarget.gameObject);
                     ChangeState(EnemyState.Attacking);
-                    attackCooldown = AttackCooldown; 
+                    attackCooldown = stats.GetWeapon().Cooldown; 
                 } 
             }
             else
@@ -132,10 +130,10 @@ public abstract class EnemyBase : MonoBehaviour
             }
             if (attackCooldown <= 0)
             {
-                if ((currentTarget.position - transform.position).magnitude <= AttackRange)
+                if ((currentTarget.position - transform.position).magnitude <= stats.GetWeapon().Range)
                 {
-                    Attack();
-                    attackCooldown = AttackCooldown;
+                    Attack(currentTarget.gameObject);
+                    attackCooldown = stats.GetWeapon().Cooldown;
                 }
                 else  ChangeState(EnemyState.Chasing);
 
