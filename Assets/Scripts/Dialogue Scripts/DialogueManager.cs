@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     public Button _option2;
     public Button _option3;
     public Button _NewSentenceButton;
+    public Button _speak;
 
     public GameObject[] ToDisable;
     public UnityEvent OnStartDialogue;
@@ -30,6 +31,8 @@ public class DialogueManager : MonoBehaviour
     private string sentence;
     public bool _isdialogue = false;
     private FirstPersonAIO player;
+    private PlayerActions _playeractions;
+    public bool displayingdialogue = false;
 
     NPC npc;
     private void Start() 
@@ -82,6 +85,8 @@ public class DialogueManager : MonoBehaviour
         Cursor.visible = false;
         _isdialogue = false;
         player.playerCanMove = true;
+        _playeractions = GameObject.FindWithTag("Player").GetComponent<PlayerActions>();
+        _playeractions._indialogue = false;
     }
 
 
@@ -98,6 +103,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void OptionsActive()
     {
+        Debug.Log("Speak button pressed");
         _NewSentenceButton.gameObject.SetActive(false);
         _NewSentenceButton.interactable = false;
         DialogueText.gameObject.SetActive(false);
@@ -109,6 +115,8 @@ public class DialogueManager : MonoBehaviour
             _option1.interactable = true;
             _option2.gameObject.SetActive(true);
             _option2.interactable = true;
+            _speak.gameObject.SetActive(false);
+            _speak.interactable = false;
         }
         else if(_options = true && _3options == true)
         {
@@ -118,11 +126,14 @@ public class DialogueManager : MonoBehaviour
             _option2.interactable = true;
             _option3.gameObject.SetActive(true);
             _option3.interactable = true;
+            _speak.gameObject.SetActive(false);
+            _speak.interactable = false;
         }
     }
     public void DisplayNextSentence(GameObject caller)
     {
         Debug.Log(caller.name);
+        Debug.Log("NextSentence Pressed");
         _NewSentenceButton.interactable = false;
         if(sentences.Count == 0)
         {
@@ -136,6 +147,7 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator Type()
     {
+        displayingdialogue = true;
         DialogueText.text = "";
         foreach(char letter in sentence)
         {
@@ -143,6 +155,7 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(_textSpeed*Time.deltaTime);
         }
         _NewSentenceButton.interactable = true;
+        displayingdialogue = false;
     }
     public void Choices()
     {
