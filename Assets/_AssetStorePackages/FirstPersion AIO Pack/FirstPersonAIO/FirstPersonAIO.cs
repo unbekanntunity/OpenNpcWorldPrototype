@@ -316,7 +316,8 @@ public class BETA_SETTINGS{
         if (Input.GetMouseButtonDown(0))
         {
             anim.SetBool("isAttacking", true);
-            int layerMask = LayerMask.GetMask("Npc");
+            int layerMask = LayerMask.GetMask("Player");
+            layerMask = ~layerMask;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 GameObject attackable = hit.collider.gameObject;

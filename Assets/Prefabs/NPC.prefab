@@ -327,6 +327,7 @@ MonoBehaviour:
     BaseValue: 0
   Armor:
     BaseValue: 0
+  weapon: {fileID: 0}
 --- !u!114 &3138425072226794443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1594,7 +1595,7 @@ GameObject:
   - component: {fileID: 8103033540630317302}
   - component: {fileID: 8103033540638041942}
   - component: {fileID: 4761375624122382681}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PT_Medieval_Male_Peasant_01_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}

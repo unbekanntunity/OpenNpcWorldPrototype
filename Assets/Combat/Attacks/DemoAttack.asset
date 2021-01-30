@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78f41acb6ebf0a41874df1fd1cd52b8, type: 3}
   m_Name: DemoAttack
   m_EditorClassIdentifier: 
-  Cooldown: 0
+  Cooldown: 2
   minDamage: 10
   maxDamage: 20
   criticalMultipliyer: 2

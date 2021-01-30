@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,43 @@ using UnityEngine;
 public class Weapon : AttackDefinition
 {
     public Rigidbody weaponPref;
+    public WeaponType type;
+    public Projectile ProjectileToFire;
+    public float ProjectileSpeed;
+    public void ExecuteAttack(GameObject attacker, Vector3 startSpot, Quaternion target, int layer)
+    {
+        Projectile projectile = Instantiate(ProjectileToFire, startSpot, target);
+        projectile.Fire(attacker, target, ProjectileSpeed, Range);
 
-    public void ExecuteAttack(GameObject attacker, GameObject defender)
+        projectile.gameObject.layer = layer;
+
+        projectile.ProjectileCollided += OnProjectileCollided;
+    }
+
+    private void OnProjectileCollided(GameObject attacker, GameObject defender)
+    {
+        Debug.Log("lol");
+        if (attacker == null || defender == null)
+            return;
+
+        var attackerStats = attacker.GetComponent<CharacterStats>();
+        var defenderStats = defender.GetComponent<CharacterStats>();
+
+        if (defenderStats == null)
+            return;
+        
+
+        var attack = CreateAttack(attackerStats, defenderStats);
+
+        var attackables = defender.GetComponentsInChildren(typeof(IAttackable));
+
+        foreach (IAttackable attackable in attackables)
+        {
+            attackable.OnAttack(attacker, attack);
+        }
+    }
+
+    public virtual void ExecuteAttack(GameObject attacker, GameObject defender)
     {
         if (defender == null)
             return;
@@ -30,3 +66,4 @@ public class Weapon : AttackDefinition
         }
     }
 }
+public enum WeaponType { LongRange, LowRange}
