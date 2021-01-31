@@ -22,7 +22,6 @@ public class Weapon : AttackDefinition
 
     private void OnProjectileCollided(GameObject attacker, GameObject defender)
     {
-        Debug.Log("lol");
         if (attacker == null || defender == null)
             return;
 
