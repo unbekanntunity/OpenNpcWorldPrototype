@@ -115,25 +115,52 @@ public class ItemButtonHandler : MonoBehaviour
                 ItemButtonHandler temp = LastCollidedObject.GetComponent<ItemButtonHandler>();
                 if (bIsItemButton)
                 {
-                    // if temp has inventory defined, then it is bound to the inventory
-                    if (temp.Inventory)
+                    if (Inventory)
                     {
-                        if (temp && temp.bIsItemButton)
+                        // if temp has inventory defined, then it is bound to the inventory
+                        if (temp.Inventory)
                         {
-                            Inventory.SwitchItems(transform.parent.GetSiblingIndex(), temp.transform.parent.GetSiblingIndex());
+                            if (temp && temp.bIsItemButton)
+                            {
+                                Inventory.SwitchItems(transform.parent.GetSiblingIndex(), temp.transform.parent.GetSiblingIndex());
+                            }
+                            else if (temp && temp.bIsEquipField && Inventory.CanEquipItem(ItemData, temp.transform.parent.GetSiblingIndex()))
+                            {
+                                Inventory.EquipItem(ItemData, temp.transform.parent.GetSiblingIndex());
+                            }
+                            else transform.position = Position;
                         }
-                        else if (temp && temp.bIsEquipField && Inventory.CanEquipItem(ItemData, temp.transform.parent.GetSiblingIndex()))
+                        // if inventory is not defined, it may be bound to a chest
+                        else if (temp.chest)
                         {
-                            Inventory.EquipItem(ItemData, temp.transform.parent.GetSiblingIndex());
+                            Inventory.StoreItem(transform.parent.GetSiblingIndex(), temp.transform.parent.GetSiblingIndex());
                         }
-                        else transform.position = Position;
+                        // if none of the above are defines, there is a problem...
+                        else
+                        {
+                            transform.position = Position;
+                        }
                     }
-                    // if inventory is not defined, it may be bound to a chest
-                    else if(temp.chest)
+                    else if (chest)
                     {
-                        Inventory.StoreItem(transform.parent.GetSiblingIndex(), temp.transform.parent.GetSiblingIndex());
+                        if (temp.chest)
+                        {
+                            if (temp && temp.bIsItemButton)
+                            {
+                                chest.SwitchItems(transform.parent.GetSiblingIndex(), temp.transform.parent.GetSiblingIndex());
+                            }
+                            else transform.position = Position;
+                        }
+                        else if (temp.Inventory)
+                        {
+                            temp.Inventory.TakeItem(temp.transform.parent.GetSiblingIndex(), transform.parent.GetSiblingIndex());
+                        }
+                        // if none of the above are defines, there is a problem...
+                        else
+                        {
+                            transform.position = Position;
+                        }
                     }
-                    // if none of the above are defines, there is a problem...
                     else
                     {
                         transform.position = Position;

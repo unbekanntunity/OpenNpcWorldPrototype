@@ -101,8 +101,9 @@ public class Chest : MonoBehaviour
         int SlotIndex = FindItem(Slot.Item, Slot.Count);
         if (SlotIndex != -1)
         {
-            Items.RemoveAt(SlotIndex);
+            Items[SlotIndex] = new Inventory.ItemData(null, 0);
         }
+        RefreshUI();
     }
 
     public void OnStoreItem(Inventory.ItemData Slot, int Index)
@@ -163,4 +164,15 @@ public class Chest : MonoBehaviour
         return -1;
     }
 
+    public void SwitchItems(int Item1Index, int Item2Index)
+    {
+        Inventory.ItemData Item1Data = Items[Item1Index];
+        Inventory.ItemData Item2Data = Items[Item2Index];
+        Items[Item2Index] = Item1Data;
+        Items[Item1Index] = Item2Data;
+
+        RefreshUI();
+    }
 }
+
+

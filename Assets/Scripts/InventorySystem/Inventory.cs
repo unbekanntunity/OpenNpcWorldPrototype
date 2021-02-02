@@ -439,6 +439,13 @@ public class Inventory : MonoBehaviour
         RefreshInventoryUI();
     }
 
+    public void TakeItem(int InventorySlotIndex, int ChestSlotIndex)
+    {
+        InventoryList[InventorySlotIndex] = CurrentOpenChest.Items[ChestSlotIndex];
+        CurrentOpenChest.OnTakeItem(InventoryList[InventorySlotIndex]);
+        RefreshInventoryUI();
+    }
+
     void CraftItem(ItemData ItemToCraft)
     {
 
