@@ -26,7 +26,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 if (stats.GetWeapon().type == WeaponType.LongRange)
                 {
-                    stats.GetWeapon().ExecuteAttack(gameObject, gameObject.transform.position + Vector3.up / 2, gameObject.transform.rotation, LayerMask.NameToLayer("Player Projectile"));
+                    stats.GetWeapon().ExecuteAttack(gameObject, gameObject.transform.position + new Vector3(0, 0.4f, 0), gameObject.transform.rotation, LayerMask.NameToLayer("Player Projectile"));
                 }
                 else
                 {
