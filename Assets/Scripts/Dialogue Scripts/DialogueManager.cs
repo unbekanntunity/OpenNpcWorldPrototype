@@ -15,8 +15,6 @@ public class DialogueManager : MonoBehaviour
     public Button _option1;
     public Button _option2;
     public Button _option3;
-    public Button _NewSentenceButton;
-    public Button _speak;
 
     public GameObject[] ToDisable;
     public UnityEvent OnStartDialogue;
@@ -33,6 +31,7 @@ public class DialogueManager : MonoBehaviour
     private FirstPersonAIO player;
     private PlayerActions _playeractions;
     public bool displayingdialogue = false;
+    public bool _speak = false;
 
     NPC npc;
     private void Start() 
@@ -47,12 +46,12 @@ public class DialogueManager : MonoBehaviour
         npc = GetComponent<NPC>();
     }
 
-    public void say() 
+    public void say(GameObject caller) 
     {
         player.playerCanMove = false;
         _isdialogue = true;
         UpdateFile();
-        _name.text = npc.name;
+        _name.text = caller.name;
         player.lockAndHideCursor = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -103,9 +102,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void OptionsActive()
     {
-        Debug.Log("Speak button pressed");
-        _NewSentenceButton.gameObject.SetActive(false);
-        _NewSentenceButton.interactable = false;
+        Debug.Log("Player Speak started");
         DialogueText.gameObject.SetActive(false);
         _name.gameObject.SetActive(false);
         _options = true;
@@ -115,8 +112,6 @@ public class DialogueManager : MonoBehaviour
             _option1.interactable = true;
             _option2.gameObject.SetActive(true);
             _option2.interactable = true;
-            _speak.gameObject.SetActive(false);
-            _speak.interactable = false;
         }
         else if(_options = true && _3options == true)
         {
@@ -126,15 +121,11 @@ public class DialogueManager : MonoBehaviour
             _option2.interactable = true;
             _option3.gameObject.SetActive(true);
             _option3.interactable = true;
-            _speak.gameObject.SetActive(false);
-            _speak.interactable = false;
         }
     }
     public void DisplayNextSentence(GameObject caller)
     {
         Debug.Log(caller.name);
-        Debug.Log("NextSentence Pressed");
-        _NewSentenceButton.interactable = false;
         if(sentences.Count == 0)
         {
             EndDialogue();
@@ -154,7 +145,6 @@ public class DialogueManager : MonoBehaviour
             DialogueText.text += letter;
             yield return new WaitForSeconds(_textSpeed*Time.deltaTime);
         }
-        _NewSentenceButton.interactable = true;
         displayingdialogue = false;
     }
     public void Choices()
@@ -166,11 +156,12 @@ public class DialogueManager : MonoBehaviour
         _option2.interactable = false;
         _option3.gameObject.SetActive(false);
         _option3.interactable = false;
-        _NewSentenceButton.interactable = true;
         DialogueText.gameObject.SetActive(true);
         _name.gameObject.SetActive(true);
         DialogueText.text = sentence;
         _name.text = "Player";
         Debug.Log(sentence);
+        _speak = false;
+        displayingdialogue = false;
     }
 }

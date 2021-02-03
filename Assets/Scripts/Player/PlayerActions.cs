@@ -34,7 +34,7 @@ public class PlayerActions : MonoBehaviour
                     Vector3 rot = dialogue.transform.eulerAngles;
                     dialogue.transform.LookAt(transform);
                     dialogue.transform.eulerAngles = new Vector3(rot.x, dialogue.transform.eulerAngles.y, rot.z);
-                    dialogue.say();
+                    dialogue.say(_currenthit.transform.gameObject);
                 }
             }
         }
@@ -67,12 +67,12 @@ public class PlayerActions : MonoBehaviour
     private void PressSpeakButton(DialogueManager dialogue)
     {
         var pointer = new PointerEventData(EventSystem.current);
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && dialogue._speak == true)
         {
-            Debug.Log("Mouse 0 pressed");
-            ExecuteEvents.Execute(dialogue._speak.gameObject, pointer, ExecuteEvents.submitHandler);
+            dialogue.displayingdialogue = true;
+            dialogue.OptionsActive();
         }
-        if(Input.GetKeyDown(KeyCode.Space) && dialogue.displayingdialogue == false)
+        if(Input.GetMouseButtonDown(0) && dialogue.displayingdialogue == false)
         {
             dialogue.DisplayNextSentence(_currenthit.transform.gameObject);
         }
