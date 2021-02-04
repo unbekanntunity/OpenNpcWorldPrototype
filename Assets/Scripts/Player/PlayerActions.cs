@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class PlayerActions : MonoBehaviour
 {
-    public KeyCode InteractButton = KeyCode.E;
-    public LayerMask Mask;
-    public float InteractionRange;
-    public Camera PlayerCamera;
 
+    public LayerMask Mask;
+    public Camera PlayerCamera;
     public GameObject QuestUiWindow;
     private bool questWindowActive = false;
     public Quest quest;
+//Dialogue    
+    public GameObject dialogue_gameobject;
+    public KeyCode InteractButton = KeyCode.E;    
+    public float InteractionRange;
+
     public bool _indialogue = false;
     private RaycastHit _currenthit;
-
     private void Update()
     {
         if (Input.GetKeyDown(InteractButton))
@@ -30,6 +33,7 @@ public class PlayerActions : MonoBehaviour
                     return;
                 if(dialogue._isdialogue == false)
                 {
+                    dialogue_gameobject.SetActive(true);
                     _indialogue = true;
                     Vector3 rot = dialogue.transform.eulerAngles;
                     dialogue.transform.LookAt(transform);

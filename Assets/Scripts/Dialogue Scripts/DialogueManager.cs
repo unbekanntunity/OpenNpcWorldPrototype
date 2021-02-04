@@ -10,12 +10,6 @@ using System.IO;
 public class DialogueManager : MonoBehaviour
 {
     public Camera dialogueCamera;
-    public TMP_Text DialogueText;
-    public TMP_Text _name;
-    public Button _option1;
-    public Button _option2;
-    public Button _option3;
-
     public GameObject[] ToDisable;
     public UnityEvent OnStartDialogue;
     public Queue<string> sentences;
@@ -32,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     private PlayerActions _playeractions;
     public bool displayingdialogue = false;
     public bool _speak = false;
+    private Dialogue _dialogue;
 
     NPC npc;
     private void Start() 
@@ -48,10 +43,17 @@ public class DialogueManager : MonoBehaviour
 
     public void say(GameObject caller) 
     {
+        _playeractions = GameObject.FindWithTag("Player").GetComponent<PlayerActions>();
+        _dialogue = _playeractions.dialogue_gameobject.GetComponent<Dialogue>();
+        if(caller == null)
+        {
+            Debug.Log("Dialogue is null");
+        }
         player.playerCanMove = false;
         _isdialogue = true;
         UpdateFile();
-        _name.text = caller.name;
+        _dialogue._name.text = caller.name;
+        Debug.Log(caller.name);
         player.lockAndHideCursor = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -68,7 +70,7 @@ public class DialogueManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);
         }
-        DisplayNextSentence(gameObject);
+        DisplayNextSentence(caller.gameObject);
         OnStartDialogue.Invoke();
     }
 
@@ -86,6 +88,7 @@ public class DialogueManager : MonoBehaviour
         player.playerCanMove = true;
         _playeractions = GameObject.FindWithTag("Player").GetComponent<PlayerActions>();
         _playeractions._indialogue = false;
+        _playeractions.dialogue_gameobject.SetActive(false);
     }
 
 
@@ -102,26 +105,30 @@ public class DialogueManager : MonoBehaviour
     }
     public void OptionsActive()
     {
-        Debug.Log("Player Speak started");
-        DialogueText.gameObject.SetActive(false);
-        _name.gameObject.SetActive(false);
+        Debug.Log("Player Options started");
+        _dialogue.DialogueText.gameObject.SetActive(false);
+        _dialogue._name.gameObject.SetActive(false);
         _options = true;
-        if (_options = true && _option2 == true)
+        if (_options = true && _2options == true)
         {
-            _option1.gameObject.SetActive(true);
-            _option1.interactable = true;
-            _option2.gameObject.SetActive(true);
-            _option2.interactable = true;
+            _dialogue._option1.gameObject.SetActive(true);
+            _dialogue._option1.interactable = true;
+            _dialogue._option2.gameObject.SetActive(true);
+            _dialogue._option2.interactable = true;
         }
         else if(_options = true && _3options == true)
         {
-            _option1.gameObject.SetActive(true);
-            _option1.interactable = true;
-            _option2.gameObject.SetActive(true);
-            _option2.interactable = true;
-            _option3.gameObject.SetActive(true);
-            _option3.interactable = true;
+            _dialogue._option1.gameObject.SetActive(true);
+            _dialogue._option1.interactable = true;
+            _dialogue._option2.gameObject.SetActive(true);
+            _dialogue._option2.interactable = true;
+            _dialogue._option3.gameObject.SetActive(true);
+            _dialogue._option3.interactable = true;
         }
+        _dialogue._option1.onClick.AddListener(Choices);
+        _dialogue._option2.onClick.AddListener(Choices);
+        _dialogue._option3.onClick.AddListener(Choices);
+
     }
     public void DisplayNextSentence(GameObject caller)
     {
@@ -139,10 +146,10 @@ public class DialogueManager : MonoBehaviour
     IEnumerator Type()
     {
         displayingdialogue = true;
-        DialogueText.text = "";
+        _dialogue.DialogueText.text = "";
         foreach(char letter in sentence)
         {
-            DialogueText.text += letter;
+            _dialogue.DialogueText.text += letter;
             yield return new WaitForSeconds(_textSpeed*Time.deltaTime);
         }
         displayingdialogue = false;
@@ -150,17 +157,16 @@ public class DialogueManager : MonoBehaviour
     public void Choices()
     {
         sentence = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().text;
-        _option1.gameObject.SetActive(false);
-        _option1.interactable = false;
-        _option2.gameObject.SetActive(false);
-        _option2.interactable = false;
-        _option3.gameObject.SetActive(false);
-        _option3.interactable = false;
-        DialogueText.gameObject.SetActive(true);
-        _name.gameObject.SetActive(true);
-        DialogueText.text = sentence;
-        _name.text = "Player";
-        Debug.Log(sentence);
+        _dialogue._option1.gameObject.SetActive(false);
+        _dialogue._option1.interactable = false;
+        _dialogue._option2.gameObject.SetActive(false);
+        _dialogue._option2.interactable = false;
+        _dialogue._option3.gameObject.SetActive(false);
+        _dialogue._option3.interactable = false;
+        _dialogue.DialogueText.gameObject.SetActive(true);
+        _dialogue._name.gameObject.SetActive(true);
+        _dialogue.DialogueText.text = sentence;
+        _dialogue._name.text = "Player";
         _speak = false;
         displayingdialogue = false;
     }
