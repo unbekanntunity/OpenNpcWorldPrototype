@@ -19,3 +19,6 @@ MonoBehaviour:
   criticalChance: 0.4
   Range: 3
   weaponPref: {fileID: 0}
+  type: 1
+  ProjectileToFire: {fileID: 0}
+  ProjectileSpeed: 0
