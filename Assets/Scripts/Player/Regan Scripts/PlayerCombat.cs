@@ -17,10 +17,15 @@ public class PlayerCombat : MonoBehaviour
     {
         if (attackCooldown > 0)
             attackCooldown -= Time.deltaTime;
+
+        if (Input.GetMouseButton(1) && stats.GetShield() != null)
+            stats.isBlocking = true;
+        else
+            stats.isBlocking = false;
     }
     public void AttackTarget(GameObject target)
     {
-        if (attackCooldown <= 0)
+        if (attackCooldown <= 0 && !stats.isBlocking)
         {
             if (stats.GetWeapon() != null)
             {

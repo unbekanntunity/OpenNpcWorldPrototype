@@ -9,6 +9,8 @@ public class CharacterStats : MonoBehaviour
     public Stat Armor;
 
     public Weapon weapon;
+    public Shield shield;
+    public bool isBlocking;
     void Awake()
     {
         currentHealth = new Stat();
@@ -49,6 +51,13 @@ public class CharacterStats : MonoBehaviour
     {
         if (weapon != null)
             return weapon;
+        else
+            return null;
+    }
+    public Shield GetShield()
+    {
+        if (shield != null)
+            return shield;
         else
             return null;
     }

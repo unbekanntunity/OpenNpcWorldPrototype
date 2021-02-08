@@ -55,6 +55,12 @@ public class Weapon : AttackDefinition
         var attackerStats = attacker.GetComponent<CharacterStats>();
         var defenderStats = defender.GetComponent<CharacterStats>();
 
+        if (defenderStats.isBlocking)
+        {
+            Debug.Log("block");
+            return;
+        }
+
         var attack = CreateAttack(attackerStats, defenderStats);
 
         var attackables = defender.GetComponentsInChildren(typeof(IAttackable));
