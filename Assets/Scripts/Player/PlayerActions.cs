@@ -20,7 +20,7 @@ public class PlayerActions : MonoBehaviour
     private RaycastHit _currenthit;
     private void Update()
     {
-        if (Input.GetKeyDown(InteractButton))
+        if (Input.GetKeyDown(InteractButton) && !_indialogue)
         {
             RaycastHit hit;
             if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out hit,InteractionRange, Mask))
@@ -71,14 +71,10 @@ public class PlayerActions : MonoBehaviour
     private void PressSpeakButton(DialogueManager dialogue)
     {
         var pointer = new PointerEventData(EventSystem.current);
-        if(Input.GetMouseButtonDown(0) && dialogue._speak == true)
+        if(Input.GetMouseButtonDown(0) && dialogue.displayingdialogue == false)
         {
             dialogue.displayingdialogue = true;
             dialogue.OptionsActive();
-        }
-        if(Input.GetMouseButtonDown(0) && dialogue.displayingdialogue == false)
-        {
-            dialogue.DisplayNextSentence(_currenthit.transform.gameObject);
         }
     }
 }
