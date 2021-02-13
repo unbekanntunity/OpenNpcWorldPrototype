@@ -15934,6 +15934,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 104326226}
     m_Modifications:
+    - target: {fileID: 961918642213623587, guid: b7609933d54cc8349bdec998d6c3c3ac,
+        type: 3}
+      propertyPath: button.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 961918642213623587, guid: b7609933d54cc8349bdec998d6c3c3ac,
+        type: 3}
+      propertyPath: button.Array.data[0]
+      value: 
+      objectReference: {fileID: 5173357008994257674, guid: f868cd3db13f4574f90b147fbc3ac3ab,
+        type: 3}
+    - target: {fileID: 961918642213623587, guid: b7609933d54cc8349bdec998d6c3c3ac,
+        type: 3}
+      propertyPath: button.Array.data[1]
+      value: 
+      objectReference: {fileID: 4885024131471640980, guid: 6bb901cf40e12404991bffb17b91b5b6,
+        type: 3}
+    - target: {fileID: 961918642213623587, guid: b7609933d54cc8349bdec998d6c3c3ac,
+        type: 3}
+      propertyPath: button.Array.data[2]
+      value: 
+      objectReference: {fileID: 8480160164520682848, guid: 81764e6b1bcd12140be6cb10c7a7c5e1,
+        type: 3}
     - target: {fileID: 3764861247842769290, guid: b7609933d54cc8349bdec998d6c3c3ac,
         type: 3}
       propertyPath: m_IsActive

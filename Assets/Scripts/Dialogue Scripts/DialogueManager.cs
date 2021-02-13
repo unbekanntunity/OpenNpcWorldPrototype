@@ -30,6 +30,9 @@ public class DialogueManager : MonoBehaviour
     {
         sentences = new Queue<string>();
         player = GameObject.FindWithTag("Player").GetComponent<FirstPersonAIO>();
+        _playeractions = GameObject.FindWithTag("Player").GetComponent<PlayerActions>();
+        _dialogue = _playeractions.dialogue_gameobject;
+        dialogueScript = _dialogue.GetComponent<Dialogue>();
     }
     private void Awake()
     {
@@ -40,9 +43,7 @@ public class DialogueManager : MonoBehaviour
 
     public void say(GameObject caller) 
     {
-        _playeractions = GameObject.FindWithTag("Player").GetComponent<PlayerActions>();
-        _dialogue = _playeractions.dialogue_gameobject;
-        dialogueScript = _dialogue.GetComponent<Dialogue>();
+
         if(caller == null)
         {
             Debug.Log("Dialogue is null");
@@ -98,7 +99,7 @@ public class DialogueManager : MonoBehaviour
     {
         OnStartDialogue.RemoveAllListeners();
     }
-    public void UpdateFile()
+    private void UpdateFile()
     {
         string path;
         path = "Assets/NPC dialogues/SentenceTesting.txt";
@@ -119,12 +120,12 @@ public class DialogueManager : MonoBehaviour
                 break;
             a.gameObject.SetActive(true);
             a.interactable = true;
-            a.onClick.AddListener(Choices);
+            AddButtonListener(a, index);
             a.GetComponentInChildren<Text>().text = sentence1.GetSentence(index).text;
             index++;
         }
     }
-    public void DisplayNextSentence()
+    private void DisplayNextSentence()
     {
         if (sentence1.answer != null)
         {
@@ -148,14 +149,15 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(_textSpeed*Time.deltaTime);
         }
         displayingdialogue = false;
-        if (!sentence1.HasPaths())
-        {
-            EndDialogue();
-        }
+        // if (!sentence1.HasPaths())
+        // {
+        //     Debug.Log("Has Ended");
+        //     EndDialogue();
+        // }
     }
-    public void Choices()
+    private void Choices(int index)
     {
-        sentence = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().text;
+        Debug.Log(index);
 
         var options = _dialogue.GetComponentsInChildren<Button>(true);
 
@@ -164,12 +166,18 @@ public class DialogueManager : MonoBehaviour
             a.gameObject.SetActive(false);
             a.interactable = false;
         }
-        /*
-        _dialogue.DialogueText.gameObject.SetActive(true);
-        _dialogue._name.gameObject.SetActive(true);
-        _dialogue.DialogueText.text = sentence;
-        _dialogue._name.text = "Player";
+        sentence1 = sentence1.choices[index];
+        dialogueScript.DialogueText.gameObject.SetActive(true);
+        dialogueScript._name.gameObject.SetActive(true);
         displayingdialogue = false;
-        */
+        DisplayNextSentence();
+    }
+    private void AddButtonListener(Button a, int index)
+    {
+        a.onClick.AddListener(() =>
+        {
+            Choices(index);
+        }
+        );
     }
 }

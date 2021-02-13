@@ -73,6 +73,11 @@ public class PlayerActions : MonoBehaviour
         var pointer = new PointerEventData(EventSystem.current);
         if(Input.GetMouseButtonDown(0) && dialogue.displayingdialogue == false)
         {
+            if (!dialogue.sentence1.HasPaths())
+            {
+                Debug.Log("Has Ended");
+                dialogue.EndDialogue();
+            }
             dialogue.displayingdialogue = true;
             dialogue.OptionsActive();
         }
