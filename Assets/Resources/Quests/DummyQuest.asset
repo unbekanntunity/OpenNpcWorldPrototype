@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f233045ccad9ca743932191723931089, type: 3}
   m_Name: DummyQuest
   m_EditorClassIdentifier: 
-  id: 
-  prerequisite_quest: 
-  status: 0
+  isActive: 0
   title: This is a Dummy Quest
   description: This is just a dummy description for duumy quest
   reward: 70
@@ -22,12 +20,3 @@ MonoBehaviour:
     goalType: 1
     requiredAmount: 10
     currentAmount: 0
-    killing:
-      NameOfTargets:
-      - 
-      - 
-      AmountNeeded: 0000000000000000
-    gathering:
-      NameOfTarget: []
-    talking:
-      NameOfTarget: []

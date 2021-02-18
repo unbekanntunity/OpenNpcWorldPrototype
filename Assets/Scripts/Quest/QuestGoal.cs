@@ -6,11 +6,9 @@ using UnityEngine;
 public class QuestGoal 
 {
     public GoalType goalType;
+
     public int requiredAmount;
     public int currentAmount;
-    public Killing killing;
-    public Gathering gathering;
-    public Talking talking;
 
     public bool isReached()
     {
@@ -33,6 +31,5 @@ public class QuestGoal
 public enum GoalType
 {
     Kill,
-    Gathering,
-    Talking
+    Gathering
 }
