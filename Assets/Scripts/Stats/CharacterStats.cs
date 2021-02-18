@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class CharacterStats : MonoBehaviour
     public Weapon weapon;
     public Shield shield;
     public bool isBlocking;
+
+    public event Action OnHealthValueChanged;
+
     void Awake()
     {
         currentHealth = new Stat();
@@ -19,12 +23,12 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(GameObject attacker, float damage)
     {
-        /*
-        damage -= Armor.GetValue();
-        */
+        if (damage <= 0f) return;
 
-        if (damage > 0.0f)
-            currentHealth.SetValue(currentHealth.GetValue() - damage);
+        currentHealth.SetValue(currentHealth.GetValue() - damage);
+
+        OnHealthValueChanged?.Invoke();
+
         Debug.Log(transform.name + " takes " + damage + " damage");
     }
 
