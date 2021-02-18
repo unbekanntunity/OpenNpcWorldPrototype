@@ -14,12 +14,14 @@ public class NPC : NpcData
     [SerializeField] private float speedAnimDevider = 1;
     [SerializeField] private float stopDistance;
     [SerializeField] private float stopDistanceRandomAdjustment;
-   
+    public float VisionRange;
+    public bool attacked;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
-      
+
 
         FindObjectOfType<DayAndNightControl>().OnMorningHandler += GoToWork;
         FindObjectOfType<DayAndNightControl>().OnEveningHandler += GoHome;
@@ -34,19 +36,24 @@ public class NPC : NpcData
     {
         anim.SetFloat("InputMagnitude", agent.velocity.magnitude / speedAnimDevider);
 
-        if((currentState == NpcStates.GoingToWork && Vector3.Distance(transform.position, work.position) < stopDistance )|| (agent.remainingDistance == 0 && !agent.pathPending))
+        if ((currentState == NpcStates.GoingToWork && Vector3.Distance(transform.position, work.position) < stopDistance) || (agent.remainingDistance == 0 && !agent.pathPending))
         {
-            if(ShowDebugMessages)
-            Debug.Log("StartingToWork");
+            if (ShowDebugMessages)
+                Debug.Log("StartingToWork");
             currentState = NpcStates.Working;
             anim.SetBool("Working", true);
         }
+        if (attacked)
+        {
+            anim.SetBool("Working", false);
+            Escape();
+        }
     }
 
-    private void SetMoveTarget(Transform target)
+    private void SetMoveTarget(Vector3 target)
     {
         agent.ResetPath();
-        agent.SetDestination(target.position);
+        agent.SetDestination(target);
     }
 
     private void GoToWork()
@@ -55,9 +62,9 @@ public class NPC : NpcData
             return;
 
         currentState = NpcStates.GoingToWork;
-        SetMoveTarget(work);
-        if(ShowDebugMessages)
-        Debug.Log(name + " is going to work");
+        SetMoveTarget(work.position);
+        if (ShowDebugMessages)
+            Debug.Log(name + " is going to work");
     }
 
     private void GoHome()
@@ -68,9 +75,24 @@ public class NPC : NpcData
         currentState = NpcStates.GoingHome;
         anim.SetBool("Working", false);
 
-        SetMoveTarget(home);
-        if(ShowDebugMessages)
-        Debug.Log(name + " is going home");
+        SetMoveTarget(home.position);
+        if (ShowDebugMessages)
+            Debug.Log(name + " is going home");
+    }
+    private void Escape()
+    {
+        if (currentState == NpcStates.Escaping)
+            return;
+        currentState = NpcStates.Escaping;
+        anim.SetFloat("InputMagnitude", 1);
+        Vector3 dest = transform.position;
+        dest = new Vector3(
+                Random.Range(transform.position.x - VisionRange * 2, transform.position.x + VisionRange * 2),
+                (transform.position.y),
+                Random.Range(transform.position.z - VisionRange * 2, transform.position.z + VisionRange * 2)
+                );
+        Debug.Log(dest);
+        SetMoveTarget(dest);
     }
     private void OnDestroy()
     {

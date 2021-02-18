@@ -5660,10 +5660,15 @@ PrefabInstance:
       propertyPath: npcName
       value: Dexter
       objectReference: {fileID: 0}
+    - target: {fileID: 6317785528158108508, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8103033540630317292, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8103033540630317292, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
@@ -5678,17 +5683,22 @@ PrefabInstance:
     - target: {fileID: 8103033540630317292, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9151587
+      value: -0.98274773
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103033540630317292, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.17620158
       objectReference: {fileID: 0}
     - target: {fileID: 8103033540630317292, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.035805028
+      value: -0.03844941
       objectReference: {fileID: 0}
     - target: {fileID: 8103033540630317292, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.038186546
+      value: -0.041006815
       objectReference: {fileID: 0}
     - target: {fileID: 8103033540630317294, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
@@ -5708,17 +5718,22 @@ PrefabInstance:
     - target: {fileID: 8103033540630317294, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9749468
+      value: -0.99472916
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103033540630317294, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.09705627
       objectReference: {fileID: 0}
     - target: {fileID: 8103033540630317294, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0246883
+      value: -0.025189243
       objectReference: {fileID: 0}
     - target: {fileID: 8103033540630317294, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.02100834
+      value: -0.021434614
       objectReference: {fileID: 0}
     - target: {fileID: 8103033540630317294, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
@@ -10997,7 +11012,7 @@ PrefabInstance:
     - target: {fileID: 8103033540630317292, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8103033540630317292, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
@@ -11047,17 +11062,22 @@ PrefabInstance:
     - target: {fileID: 8103033540630317294, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9749468
+      value: -0.99472916
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103033540630317294, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.09705627
       objectReference: {fileID: 0}
     - target: {fileID: 8103033540630317294, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0246883
+      value: -0.025189243
       objectReference: {fileID: 0}
     - target: {fileID: 8103033540630317294, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.02100834
+      value: -0.021434614
       objectReference: {fileID: 0}
     - target: {fileID: 8103033540630317294, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
@@ -12175,6 +12195,11 @@ PrefabInstance:
         type: 3}
       propertyPath: npcName
       value: Bob
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650718596372849522, guid: cd5633ded9ea10e42be05f617848635f,
+        type: 3}
+      propertyPath: VisionRange
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2722809551112734972, guid: cd5633ded9ea10e42be05f617848635f,
         type: 3}
