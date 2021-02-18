@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f233045ccad9ca743932191723931089, type: 3}
   m_Name: New Quest
   m_EditorClassIdentifier: 
-  isActive: 0
+  id: 
+  prerequisite_quest: 
+  status: 0
   title: This is another Quest.
   description: This is another quest description.
   reward: 60
